@@ -16,9 +16,10 @@
           ".json"
         ],
         "alias": {
-          "@screens": "./screens",
-          "@components": "./components",
-          "@assets": "./assets"
+          "@screens": "./src/screens",
+          "@components": "./src/components",
+          "@assets": "./assets",
+          "@global": "./src/global"
         }
       }
     ]
