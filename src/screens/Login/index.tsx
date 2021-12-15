@@ -1,10 +1,6 @@
 import React from 'react';
-import { Container, Text } from './styles';
+import { AuthScreens } from '@components/AuthScreens';
 
 export function Login() {
-  return (
-    <Container>
-      <Text>Login page</Text>
-    </Container>
-  );
+  return <AuthScreens />;
 }
