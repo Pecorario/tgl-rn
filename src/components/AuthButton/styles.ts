@@ -21,4 +21,6 @@ export const Text = styled.Text<TextProps>`
     props.type === 'primary'
       ? props.theme.colors.primary
       : props.theme.colors.text_title};
+  margin-right: ${props => (props.type !== 'tertiary' ? '2%' : '0')};
+  margin-left: ${props => (props.type === 'tertiary' ? '3%' : '0')};
 `;

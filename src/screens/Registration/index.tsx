@@ -1,30 +1,36 @@
 import React, { useState } from 'react';
 import { AuthScreens } from '@components/AuthScreens';
 import { Input } from '@components/Input';
-import { Link, TextLink } from './styles';
-import { TouchableOpacity } from 'react-native';
 
-export function Login({ navigation }: any) {
+export function Registration({ navigation }: any) {
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const onSend = () => {
-    console.log(email, password);
+    console.log(name, email, password);
+    navigation.navigate('Login');
   };
 
   const onBack = () => {
     console.log('Back');
-    navigation.navigate('Registration');
+    navigation.navigate('Login');
   };
 
   return (
     <AuthScreens
-      type="secondary"
+      type="tertiary"
       onPressInside={onSend}
       onPressOutside={onBack}
-      textButtonInside="Log In"
-      textButtonOutside="Sign Up"
+      textButtonInside="Register"
+      textButtonOutside="Back"
     >
+      <Input
+        placeholder="Name"
+        onChangeText={setName}
+        value={name}
+        keyboardType="default"
+      />
       <Input
         placeholder="Email"
         onChangeText={setEmail}
@@ -37,16 +43,6 @@ export function Login({ navigation }: any) {
         value={password}
         secureTextEntry={true}
       />
-      <TouchableOpacity
-        activeOpacity={0.6}
-        onPress={() => {
-          navigation.navigate('Forgot Password');
-        }}
-      >
-        <Link>
-          <TextLink>I forgot my password</TextLink>
-        </Link>
-      </TouchableOpacity>
     </AuthScreens>
   );
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import { TouchableOpacity } from 'react-native';
-import { MaterialIcons } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 import { Container, TextView, Text } from './styles';
 import { useTheme } from 'styled-components';
 
@@ -22,13 +22,13 @@ export function AuthButton({ text, onPress, type }: AuthButtonProps) {
         <TextView>
           {type === 'tertiary' ? (
             <>
-              <MaterialIcons name="navigate-next" size={24} color={color} />
+              <Ionicons name="arrow-back" size={24} color={color} />
               <Text type={type}>{text}</Text>
             </>
           ) : (
             <>
               <Text type={type}>{text}</Text>
-              <MaterialIcons name="navigate-next" size={24} color={color} />
+              <Ionicons name="arrow-forward" size={24} color={color} />
             </>
           )}
         </TextView>

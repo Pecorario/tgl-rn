@@ -16,6 +16,8 @@ import {
   Roboto_700Bold,
   Roboto_500Medium
 } from '@expo-google-fonts/roboto';
+import { Registration } from '@screens/Registration';
+import { ForgotPassword } from '@screens/ForgotPassword';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -32,8 +34,10 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <NavigationContainer>
-        <Stack.Navigator>
+        <Stack.Navigator initialRouteName="Login">
           <Stack.Screen name="Login" component={Login} />
+          <Stack.Screen name="Registration" component={Registration} />
+          <Stack.Screen name="Forgot Password" component={ForgotPassword} />
         </Stack.Navigator>
       </NavigationContainer>
     </ThemeProvider>
