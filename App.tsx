@@ -34,10 +34,35 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="Login">
-          <Stack.Screen name="Login" component={Login} />
-          <Stack.Screen name="Registration" component={Registration} />
-          <Stack.Screen name="Forgot Password" component={ForgotPassword} />
+        <Stack.Navigator
+          initialRouteName="Login"
+          screenOptions={{
+            headerStyle: {
+              backgroundColor: '#F7F7F7'
+            },
+            headerTintColor: '#707070',
+            headerTitleStyle: {
+              fontWeight: 'bold',
+              fontSize: 20
+            },
+            headerTitleAlign: 'center'
+          }}
+        >
+          <Stack.Screen
+            name="Login"
+            component={Login}
+            options={{ title: 'Authentication' }}
+          />
+          <Stack.Screen
+            name="Registration"
+            component={Registration}
+            options={{ title: 'Registration' }}
+          />
+          <Stack.Screen
+            name="Forgot Password"
+            component={ForgotPassword}
+            options={{ title: 'Reset password' }}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </ThemeProvider>
