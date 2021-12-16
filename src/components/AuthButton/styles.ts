@@ -1,8 +1,12 @@
 import styled from 'styled-components/native';
 
-export const Container = styled.View`
+interface TextProps {
+  type: 'primary' | 'secondary' | 'tertiary';
+}
+
+export const Container = styled.View<TextProps>`
   align-items: center;
-  margin: 8% 0;
+  margin: ${props => (props.type === 'primary' ? '8%' : '4%')} 0;
 `;
 
 export const TextView = styled.View`
@@ -10,8 +14,11 @@ export const TextView = styled.View`
   align-items: center;
 `;
 
-export const Text = styled.Text`
+export const Text = styled.Text<TextProps>`
   font-family: ${({ theme }) => theme.fonts.italicBold};
   font-size: 24px;
-  color: ${({ theme }) => theme.colors.primary};
+  color: ${props =>
+    props.type === 'primary'
+      ? props.theme.colors.primary
+      : props.theme.colors.text_title};
 `;

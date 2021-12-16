@@ -1,3 +1,4 @@
+import theme from '@global/styles/theme';
 import styled from 'styled-components/native';
 
 export const Container = styled.KeyboardAvoidingView`
@@ -21,6 +22,7 @@ export const Separator = styled.View`
   background-color: ${({ theme }) => theme.colors.primary};
   width: 80px;
   border-radius: 100px;
+  margin: 1% 0;
 `;
 
 export const SeparatorText = styled.Text`
@@ -28,6 +30,7 @@ export const SeparatorText = styled.Text`
   font-size: 18px;
   color: #fff;
   text-align: center;
+  margin: 4% 0;
 `;
 
 export const Title = styled.Text`
@@ -43,4 +46,14 @@ export const Box = styled.View`
   border-radius: 14px;
   border: 1px solid ${({ theme }) => theme.colors.border};
   margin-top: 5%;
+`;
+
+export const Footer = styled.View`
+  position: absolute;
+  bottom: 2%;
+`;
+
+export const FooterText = styled.Text`
+  font-family: ${({ theme }) => theme.fonts.regular};
+  color: ${({ theme }) => theme.colors.text_title};
 `;

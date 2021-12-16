@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Keyboard, SafeAreaView, TouchableWithoutFeedback } from 'react-native';
 import {
   Container,
@@ -7,23 +7,30 @@ import {
   PreTitle,
   Separator,
   SeparatorText,
-  Box
+  Box,
+  Footer,
+  FooterText
 } from './styles';
-import { Input } from '@components/Input';
 import { AuthButton } from '@components/AuthButton';
-import { MaterialIcons } from '@expo/vector-icons';
-import { useTheme } from 'styled-components';
 
-export function AuthScreens() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const theme = useTheme();
+interface AuthScreensProps {
+  children: React.ReactNode;
+  type: 'secondary' | 'tertiary';
+  textButtonInside: string;
+  textButtonOutside: string;
+  onPressInside: () => void;
+  onPressOutside: () => void;
+}
 
-  const sendForm = () => {
-    console.log(email, password);
-    setEmail('');
-    setPassword('');
-  };
+export function AuthScreens({
+  children,
+  type,
+  textButtonInside,
+  textButtonOutside,
+  onPressInside,
+  onPressOutside
+}: AuthScreensProps) {
+  const year = new Date().getFullYear();
 
   return (
     <SafeAreaView>
@@ -37,26 +44,21 @@ export function AuthScreens() {
             <Title>LOTTERY</Title>
           </TitleContainer>
           <Box>
-            <Input
-              placeholder="Email"
-              onChangeText={setEmail}
-              value={email}
-              keyboardType="email-address"
+            {children}
+            <AuthButton
+              onPress={onPressInside}
+              text={textButtonInside}
+              type="primary"
             />
-            <Input
-              placeholder="Password"
-              onChangeText={setPassword}
-              value={password}
-              secureTextEntry={true}
-            />
-            <AuthButton onPress={sendForm} text="Log In">
-              <MaterialIcons
-                name="navigate-next"
-                size={24}
-                color={theme.colors.primary}
-              />
-            </AuthButton>
           </Box>
+          <AuthButton
+            onPress={onPressOutside}
+            text={textButtonOutside}
+            type={type}
+          />
+          <Footer>
+            <FooterText>Copyright {year} Luby Software</FooterText>
+          </Footer>
         </Container>
       </TouchableWithoutFeedback>
     </SafeAreaView>

@@ -1,14 +1,12 @@
 import styled from 'styled-components/native';
 
-export const Container = styled.View`
-  flex: 1;
-  background-color: ${({ theme }) => theme.colors.background_primary};
-  align-items: center;
-  justify-content: center;
+export const Link = styled.View`
+  align-items: flex-end;
+  padding: 5%;
+  padding-bottom: 0;
 `;
 
-export const Text = styled.Text`
-  font-size: 18px;
-  font-family: ${({ theme }) => theme.fonts.italicBold};
-  color: ${({ theme }) => theme.colors.text_title};
+export const TextLink = styled.Text`
+  font-family: ${({ theme }) => theme.fonts.italic};
+  color: ${({ theme }) => theme.colors.text_link};
 `;
