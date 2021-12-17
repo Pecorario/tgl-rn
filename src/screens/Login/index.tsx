@@ -10,6 +10,7 @@ export function Login({ navigation }: any) {
 
   const onSend = () => {
     console.log(email, password);
+    navigation.navigate('Logged');
   };
 
   const onBack = () => {
