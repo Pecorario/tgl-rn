@@ -5,6 +5,7 @@ export const Container = styled.KeyboardAvoidingView`
   height: 100%;
   align-items: center;
   justify-content: center;
+  background: #f7f7f7;
 `;
 
 export const TitleContainer = styled.View`

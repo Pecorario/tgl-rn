@@ -6,6 +6,7 @@ import { Login } from '@screens/Login';
 import { ThemeProvider } from 'styled-components';
 import theme from '@global/styles/theme';
 import AppLoading from 'expo-app-loading';
+import { Ionicons } from '@expo/vector-icons';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -22,28 +23,80 @@ import { Registration } from '@screens/Registration';
 import { ForgotPassword } from '@screens/ForgotPassword';
 import { Home } from '@screens/Home';
 import { NewBet } from '@screens/NewBet';
+import { HeaderButtons } from '@components/HeaderButtons';
+import { Profile } from '@screens/Profile';
+import { LogoutButton } from '@components/LogoutButton';
+import { NewBetButton } from '@components/NewBetButton';
 
 function Tabs() {
   return (
     <Tab.Navigator
-      screenOptions={{
+      screenOptions={({ route, navigation }) => ({
+        tabBarIcon: ({ focused, color, size }) => {
+          let iconName;
+
+          if (route.name === 'Home') {
+            iconName = focused ? 'home-sharp' : 'home-outline';
+          } else if (route.name === 'New Bet') {
+            if (focused) {
+              return (
+                <NewBetButton
+                  onPress={() => navigation.navigate('New Bet')}
+                  active={true}
+                />
+              );
+            } else {
+              return (
+                <NewBetButton onPress={() => navigation.navigate('New Bet')} />
+              );
+            }
+          } else if (route.name === 'Profile') {
+            iconName = focused ? 'md-person-sharp' : 'md-person-outline';
+          }
+
+          return <Ionicons name={iconName} size={size} color={color} />;
+        },
+        tabBarInactiveTintColor: '#C1C1C1',
+        tabBarActiveTintColor: '#B5C401',
+        tabBarShowLabel: false,
+
         headerStyle: {
           backgroundColor: '#F7F7F7'
         },
         headerTintColor: '#707070',
         headerTitleStyle: {
           fontWeight: 'bold',
-          fontSize: 28
+          fontStyle: 'italic',
+          fontSize: 32
         },
-        headerTitleAlign: 'center',
-        title: 'TGL'
-      }}
+        // headerTitleAlign: 'center',
+        headerTitle: 'TGL',
+        headerRight: () => (
+          <LogoutButton
+            color="#707070"
+            onPress={() => navigation.navigate('Login')}
+          />
+        )
+      })}
     >
-      <Tab.Screen name="Home" component={Home} options={{ title: 'Home' }} />
+      <Tab.Screen
+        name="Home"
+        component={Home}
+        options={{
+          title: 'Home'
+        }}
+      />
       <Tab.Screen
         name="New Bet"
         component={NewBet}
-        options={{ title: 'New Bet' }}
+        options={({ navigation }) => ({
+          title: 'New Bet'
+        })}
+      />
+      <Tab.Screen
+        name="Profile"
+        component={Profile}
+        options={{ title: 'Profile' }}
       />
     </Tab.Navigator>
   );
@@ -96,7 +149,9 @@ export default function App() {
           <Stack.Screen
             name="Logged"
             component={Tabs}
-            options={{ headerShown: false }}
+            options={{
+              headerShown: false
+            }}
           />
         </Stack.Navigator>
       </NavigationContainer>

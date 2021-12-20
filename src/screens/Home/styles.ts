@@ -2,6 +2,7 @@ import styled from 'styled-components/native';
 
 export const Container = styled.View`
   padding: 8%;
+  background: #f7f7f7;
 `;
 
 export const Title = styled.Text`
@@ -17,10 +18,12 @@ export const Text = styled.Text`
 
 export const List = styled.FlatList`
   margin-top: 2%;
+  margin-bottom: 20%;
 `;
 
 export const FiltersContainer = styled.View`
   flex-direction: row;
+  flex-wrap: wrap;
   justify-content: space-around;
   margin: 2% 0;
 `;

@@ -8,9 +8,9 @@ export const Container = styled.View<ColorProps>`
   border-radius: 100px;
   border-width: 2px;
   border-color: ${props => props.color};
-  width: 90px;
   padding: 1% 0;
   justify-content: center;
+  margin: 3%;
 `;
 
 export const Text = styled.Text<ColorProps>`
