@@ -1,5 +1,5 @@
 import styled from 'styled-components/native';
-import { InputProps } from '@interfaces/InputProps';
+import { InputProps } from '@models/InputProps';
 
 export const Container = styled.View<InputProps>`
   padding: 2%;

@@ -2,7 +2,7 @@ import React from 'react';
 import { TouchableOpacity } from 'react-native';
 import { FontAwesome5, MaterialCommunityIcons } from '@expo/vector-icons';
 
-import { DefaultButton } from '@interfaces/ButtonProps';
+import { DefaultButton } from '@models/ButtonProps';
 import { Container, Text } from './styles';
 
 export function Button({ type, title, color, onPress }: DefaultButton) {

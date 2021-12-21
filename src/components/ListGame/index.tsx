@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { ListGameProps } from '@interfaces/UIProps';
+import { ListGameProps } from '@models/UIProps';
 import {
   Container,
   Numbers,

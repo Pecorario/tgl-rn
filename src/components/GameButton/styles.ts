@@ -1,5 +1,5 @@
 import styled from 'styled-components/native';
-import { ButtonProps } from '@interfaces/ButtonProps';
+import { ButtonProps } from '@models/ButtonProps';
 
 export const Container = styled.View<ButtonProps>`
   border-radius: 100px;

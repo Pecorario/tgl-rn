@@ -3,7 +3,7 @@ import { TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useTheme } from 'styled-components';
 
-import { AuthButtonProps } from '@interfaces/ButtonProps';
+import { AuthButtonProps } from '@models/ButtonProps';
 import { Container, TextView, Text } from './styles';
 
 export function AuthButton({ title, onPress, type }: AuthButtonProps) {

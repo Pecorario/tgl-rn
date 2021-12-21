@@ -1,5 +1,5 @@
 import styled from 'styled-components/native';
-import { DefaultButton } from '@interfaces/ButtonProps';
+import { DefaultButton } from '@models/ButtonProps';
 
 export const Container = styled.View<DefaultButton>`
   border-radius: 10px;

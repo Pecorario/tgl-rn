@@ -1,5 +1,5 @@
 import styled from 'styled-components/native';
-import { AuthButtonProps } from '@interfaces/ButtonProps';
+import { AuthButtonProps } from '@models/ButtonProps';
 
 export const Container = styled.View<AuthButtonProps>`
   align-items: center;

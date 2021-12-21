@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTheme } from 'styled-components';
 
-import { InputProps } from '@interfaces/InputProps';
+import { InputProps } from '@models/InputProps';
 import { Container, InputContent } from './styles';
 
 export function Input({

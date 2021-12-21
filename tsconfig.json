@@ -9,7 +9,7 @@
       "@assets/*": ["./assets/*"],
       "@styles/*": ["./src/global/styles/*"],
       "@helpers/*": ["./src/global/helpers/*"],
-      "@interfaces/*": ["./src/global/interfaces/*"],
+      "@models/*": ["src/global/models/*"],
       "@navigation/*": ["./src/navigation/*"]
     },
   },

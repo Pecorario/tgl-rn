@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { AuthScreens, Input } from '@components/index';
 
-import { RouteProps } from '@interfaces/RoutesProps';
+import { RouteProps } from '@models/RoutesProps';
 
 export function Registration({ navigation }: RouteProps) {
   const [name, setName] = useState('');

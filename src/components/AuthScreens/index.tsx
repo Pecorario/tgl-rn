@@ -3,7 +3,7 @@ import { Keyboard, SafeAreaView, TouchableWithoutFeedback } from 'react-native';
 
 import { AuthButton } from '@components/index';
 
-import { AuthScreensProps } from '@interfaces/UIProps';
+import { AuthScreensProps } from '@models/UIProps';
 import {
   Container,
   TitleContainer,

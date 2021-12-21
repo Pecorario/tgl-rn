@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { TouchableOpacity } from 'react-native';
 import { AuthScreens, Input } from '@components/index';
 
-import { RouteProps } from '@interfaces/RoutesProps';
+import { RouteProps } from '@models/RoutesProps';
 import { Link, TextLink } from './styles';
 
 export function Login({ navigation }: RouteProps) {
