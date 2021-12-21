@@ -16,13 +16,14 @@
           ".json"
         ],
         "alias": {
-          "@screens": "./src/screens",
-          "@components": "./src/components",
           "@assets": "./assets",
+          "@components": "./src/components",
           "@styles": "./src/global/styles",
           "@helpers": "./src/global/helpers",
           "@models": "./src/global/models",
-          "@navigation": "./src/navigation"
+          "@navigation": "./src/navigation",
+          "@screens": "./src/screens",
+          "@store": "./src/store"
         }
       }
     ]

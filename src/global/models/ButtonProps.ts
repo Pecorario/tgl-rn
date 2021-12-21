@@ -6,7 +6,7 @@ export interface ButtonProps {
 }
 
 export interface AuthButtonProps extends ButtonProps {
-  type: 'primary' | 'secondary' | 'tertiary';
+  type: 'primary' | 'secondary' | 'tertiary' | 'quaternary';
 }
 
 export interface DefaultButton extends ButtonProps {

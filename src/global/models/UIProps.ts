@@ -8,9 +8,16 @@ export interface AuthScreensProps {
 }
 
 export interface ListGameProps {
-  date: string;
+  date?: string;
   price: number;
   title: string;
   numbers: number[];
   color: string;
+}
+
+export interface CartProps {
+  visible: boolean;
+  onClose: () => void;
+  onOpen?: () => void;
+  onSave: () => void;
 }

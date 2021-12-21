@@ -41,7 +41,7 @@ export const Title = styled.Text`
 `;
 
 export const Box = styled.View`
-  background: ${({ theme }) => theme.colors.background_primary};
+  background: ${({ theme }) => theme.colors.background_secondary};
   width: 80%;
   border-radius: 14px;
   border: 1px solid ${({ theme }) => theme.colors.border};

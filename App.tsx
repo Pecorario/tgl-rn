@@ -1,5 +1,7 @@
 import React from 'react';
 import AppLoading from 'expo-app-loading';
+import { Provider } from 'react-redux';
+import store from '@store/index';
 import theme from '@styles/theme';
 import { ThemeProvider } from 'styled-components';
 import { Authentication } from '@navigation/Authentication';
@@ -25,8 +27,10 @@ export default function App() {
     return <AppLoading />;
   }
   return (
-    <ThemeProvider theme={theme}>
-      <Authentication />
-    </ThemeProvider>
+    <Provider store={store}>
+      <ThemeProvider theme={theme}>
+        <Authentication />
+      </ThemeProvider>
+    </Provider>
   );
 }

@@ -12,6 +12,8 @@ export function AuthButton({ title, onPress, type }: AuthButtonProps) {
   const color =
     type === 'primary' ? theme.colors.primary : theme.colors.text_title;
 
+  const differentColor = theme.colors.btn_primary;
+
   return (
     <TouchableOpacity activeOpacity={0.6} onPress={onPress}>
       <Container type={type}>
@@ -24,7 +26,15 @@ export function AuthButton({ title, onPress, type }: AuthButtonProps) {
           ) : (
             <>
               <Text type={type}>{title}</Text>
-              <Ionicons name="arrow-forward" size={24} color={color} />
+              {type === 'quaternary' ? (
+                <Ionicons
+                  name="arrow-forward"
+                  size={24}
+                  color={differentColor}
+                />
+              ) : (
+                <Ionicons name="arrow-forward" size={24} color={color} />
+              )}
             </>
           )}
         </TextView>
