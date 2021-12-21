@@ -10,5 +10,9 @@ export interface AuthButtonProps extends ButtonProps {
 }
 
 export interface DefaultButton extends ButtonProps {
-  type: 'edit' | 'save' | 'default';
+  type: 'edit' | 'save' | 'cart' | 'default';
+}
+
+export interface NumberButtonProps extends ButtonProps {
+  number: number;
 }

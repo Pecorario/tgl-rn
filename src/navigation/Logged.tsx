@@ -2,7 +2,7 @@ import React from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import { LogoutButton, NewBetButton } from '@components/index';
+import { HeaderButtons, NewBetButton } from '@components/index';
 import { Home, NewBet, Profile } from '@screens/index';
 
 const Tab = createBottomTabNavigator();
@@ -53,7 +53,7 @@ export function Logged() {
         },
         headerTitle: 'TGL',
         headerRight: () => (
-          <LogoutButton
+          <HeaderButtons
             color="#707070"
             onPress={() => navigation.navigate('Login')}
           />
