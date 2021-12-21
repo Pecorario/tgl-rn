@@ -1,19 +1,28 @@
-import theme from '@global/styles/theme';
 import styled from 'styled-components/native';
 
-export const Container = styled.View`
+interface InputProps {
+  editable: boolean;
+}
+
+export const Container = styled.View<InputProps>`
   padding: 2%;
-  border-color: ${({ theme }) => theme.colors.text_label};
+  border-color: ${props =>
+    props.editable
+      ? props.theme.colors.text_title
+      : props.theme.colors.text_link};
   border-width: 2px;
   border-radius: 10px;
   position: relative;
   margin-bottom: 8%;
 `;
 
-export const InputContent = styled.TextInput`
+export const InputContent = styled.TextInput<InputProps>`
   margin-left: 3%;
   font-family: ${({ theme }) => theme.fonts.italicBold};
-  color: ${({ theme }) => theme.colors.text_title};
+  color: ${props =>
+    props.editable
+      ? props.theme.colors.text_title
+      : props.theme.colors.text_link}; ;
 `;
 
 export const LabelContainer = styled.View`
@@ -24,8 +33,11 @@ export const LabelContainer = styled.View`
   left: 5%;
 `;
 
-export const Label = styled.Text`
+export const Label = styled.Text<InputProps>`
   text-align: center;
   font-family: ${({ theme }) => theme.fonts.italicBold};
-  color: ${({ theme }) => theme.colors.text_label};
+  color: ${props =>
+    props.editable
+      ? props.theme.colors.text_title
+      : props.theme.colors.text_link}; ;
 `;

@@ -6,19 +6,21 @@ import { useTheme } from 'styled-components';
 interface InputProps extends TextInputProps {
   value: string;
   label: string;
+  editable: boolean;
 }
 
-export function InputProfile({ value, label, ...rest }: InputProps) {
+export function InputProfile({ value, label, editable, ...rest }: InputProps) {
   const theme = useTheme();
 
   return (
-    <Container>
+    <Container editable={editable}>
       <LabelContainer>
-        <Label>{label}</Label>
+        <Label editable={editable}>{label}</Label>
       </LabelContainer>
       <InputContent
         {...rest}
         value={value}
+        editable={editable}
         placeholderTextColor={theme.colors.text_label}
       />
     </Container>
