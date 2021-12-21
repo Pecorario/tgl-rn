@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { AuthScreens } from '@components/AuthScreens';
-import { Input } from '@components/Input';
+import { AuthScreens, Input } from '@components/index';
 
-export function Registration({ navigation }: any) {
+import { RouteProps } from '@interfaces/RoutesProps';
+
+export function Registration({ navigation }: RouteProps) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');

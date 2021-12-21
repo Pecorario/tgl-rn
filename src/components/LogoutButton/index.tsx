@@ -1,9 +1,11 @@
 import React from 'react';
 import { TouchableOpacity } from 'react-native';
-import { Container } from './styles';
 import { MaterialIcons } from '@expo/vector-icons';
 
-export function LogoutButton({ color, onPress }) {
+import { ButtonProps } from '@interfaces/ButtonProps';
+import { Container } from './styles';
+
+export function LogoutButton({ color, onPress }: ButtonProps) {
   return (
     <TouchableOpacity onPress={onPress}>
       <Container>

@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { AuthScreens } from '@components/AuthScreens';
-import { Input } from '@components/Input';
+import { AuthScreens, Input } from '@components/index';
 
-export function ForgotPassword({ navigation }: any) {
+import { RouteProps } from '@interfaces/RoutesProps';
+
+export function ForgotPassword({ navigation }: RouteProps) {
   const [email, setEmail] = useState('');
 
   const onSend = () => {

@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { AuthScreens } from '@components/AuthScreens';
-import { Input } from '@components/Input';
-import { Link, TextLink } from './styles';
 import { TouchableOpacity } from 'react-native';
+import { AuthScreens, Input } from '@components/index';
 
-export function Login({ navigation }: any) {
+import { RouteProps } from '@interfaces/RoutesProps';
+import { Link, TextLink } from './styles';
+
+export function Login({ navigation }: RouteProps) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 

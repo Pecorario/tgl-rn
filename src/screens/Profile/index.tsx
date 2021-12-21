@@ -1,6 +1,8 @@
-import { Button } from '@components/Button';
-import { InputProfile } from '@components/InputProfile';
 import React, { useState } from 'react';
+import { Keyboard, TouchableWithoutFeedback } from 'react-native';
+import { useTheme } from 'styled-components';
+import { Button, InputProfile } from '@components/index';
+
 import { Container, Box, ContainerButtons } from './styles';
 
 export function Profile() {
@@ -8,6 +10,8 @@ export function Profile() {
   const [name, setName] = useState('Taynara Pecorario');
   const [email, setEmail] = useState('taynara@gmail.com');
   const [password, setPassword] = useState('12345678');
+
+  const theme = useTheme();
 
   const saveEditHandler = () => {
     alert('Saved');
@@ -25,67 +29,73 @@ export function Profile() {
   };
 
   return (
-    <Container>
-      {isEdit ? (
-        <>
-          <Box>
-            <InputProfile
-              label="Name"
-              value={name}
-              onChangeText={setName}
-              editable={true}
-            />
-            <InputProfile
-              label="Email"
-              value={email}
-              onChangeText={setEmail}
-              editable={true}
-            />
-            <InputProfile
-              label="Password"
-              value={password}
-              onChangeText={setPassword}
-              secureTextEntry={true}
-              editable={true}
-            />
-          </Box>
-          <ContainerButtons>
-            <Button
-              type="default"
-              title="Cancel"
-              onPress={cancelEditHandler}
-              color="#707070"
-            />
-            <Button
-              type="save"
-              title="Save"
-              onPress={saveEditHandler}
-              color="#B5C401"
-            />
-          </ContainerButtons>
-        </>
-      ) : (
-        <>
-          <Box>
-            <InputProfile label="Name" value={name} editable={false} />
-            <InputProfile label="Email" value={email} editable={false} />
-            <InputProfile
-              label="Password"
-              value={password}
-              editable={false}
-              secureTextEntry={true}
-            />
-          </Box>
-          <ContainerButtons>
-            <Button
-              type="edit"
-              title="Edit"
-              onPress={editHandler}
-              color="#B5C401"
-            />
-          </ContainerButtons>
-        </>
-      )}
-    </Container>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <Container>
+        {isEdit ? (
+          <>
+            <Box>
+              <InputProfile
+                placeholder="Name"
+                value={name}
+                onChangeText={setName}
+                editable={true}
+              />
+              <InputProfile
+                placeholder="Email"
+                value={email}
+                onChangeText={setEmail}
+                editable={true}
+              />
+              <InputProfile
+                placeholder="Password"
+                value={password}
+                onChangeText={setPassword}
+                secureTextEntry={true}
+                editable={true}
+              />
+            </Box>
+            <ContainerButtons>
+              <Button
+                type="default"
+                title="Cancel"
+                onPress={cancelEditHandler}
+                color={theme.colors.text_title}
+              />
+              <Button
+                type="save"
+                title="Save"
+                onPress={saveEditHandler}
+                color={theme.colors.primary}
+              />
+            </ContainerButtons>
+          </>
+        ) : (
+          <>
+            <Box>
+              <InputProfile placeholder="Name" value={name} editable={false} />
+              <InputProfile
+                placeholder="Email"
+                value={email}
+                editable={false}
+              />
+              <InputProfile
+                placeholder="Password"
+                value={password}
+                editable={false}
+                secureTextEntry={true}
+              />
+            </Box>
+            <ContainerButtons>
+              <Button
+                type="edit"
+                title="Edit"
+                onPress={editHandler}
+                color={theme.colors.primary}
+              />
+            </ContainerButtons>
+          </>
+        )}
+      </Container>
+    </TouchableWithoutFeedback>
   );
 }

@@ -1,11 +1,10 @@
-import theme from '@global/styles/theme';
 import styled from 'styled-components/native';
 
 export const Container = styled.KeyboardAvoidingView`
   height: 100%;
   align-items: center;
   justify-content: center;
-  background: #f7f7f7;
+  background: ${({ theme }) => theme.colors.background_primary};
 `;
 
 export const TitleContainer = styled.View`

@@ -1,16 +1,12 @@
 import React from 'react';
 import { TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { Container, TextView, Text } from './styles';
 import { useTheme } from 'styled-components';
 
-interface AuthButtonProps {
-  text: string;
-  type: 'primary' | 'secondary' | 'tertiary';
-  onPress: () => void;
-}
+import { AuthButtonProps } from '@interfaces/ButtonProps';
+import { Container, TextView, Text } from './styles';
 
-export function AuthButton({ text, onPress, type }: AuthButtonProps) {
+export function AuthButton({ title, onPress, type }: AuthButtonProps) {
   const theme = useTheme();
 
   const color =
@@ -23,11 +19,11 @@ export function AuthButton({ text, onPress, type }: AuthButtonProps) {
           {type === 'tertiary' ? (
             <>
               <Ionicons name="arrow-back" size={24} color={color} />
-              <Text type={type}>{text}</Text>
+              <Text type={type}>{title}</Text>
             </>
           ) : (
             <>
-              <Text type={type}>{text}</Text>
+              <Text type={type}>{title}</Text>
               <Ionicons name="arrow-forward" size={24} color={color} />
             </>
           )}

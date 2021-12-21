@@ -1,9 +1,11 @@
 import React from 'react';
 import { TouchableOpacity } from 'react-native';
-import { Container } from './styles';
 import { Ionicons } from '@expo/vector-icons';
 
-export function NewBetButton({ onPress, active = false }) {
+import { ButtonProps } from '@interfaces/ButtonProps';
+import { Container } from './styles';
+
+export function NewBetButton({ onPress, active = false }: ButtonProps) {
   return (
     <TouchableOpacity onPress={onPress}>
       <Container active={active}>

@@ -1,0 +1,16 @@
+export interface AuthScreensProps {
+  type: 'secondary' | 'tertiary';
+  children: React.ReactNode;
+  textButtonInside: string;
+  textButtonOutside: string;
+  onPressInside: () => void;
+  onPressOutside: () => void;
+}
+
+export interface ListGameProps {
+  date: string;
+  price: number;
+  title: string;
+  numbers: number[];
+  color: string;
+}

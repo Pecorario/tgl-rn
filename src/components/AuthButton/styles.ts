@@ -1,10 +1,7 @@
 import styled from 'styled-components/native';
+import { AuthButtonProps } from '@interfaces/ButtonProps';
 
-interface TextProps {
-  type: 'primary' | 'secondary' | 'tertiary';
-}
-
-export const Container = styled.View<TextProps>`
+export const Container = styled.View<AuthButtonProps>`
   align-items: center;
   margin: ${props => (props.type === 'primary' ? '8%' : '4%')} 0;
 `;
@@ -14,7 +11,7 @@ export const TextView = styled.View`
   align-items: center;
 `;
 
-export const Text = styled.Text<TextProps>`
+export const Text = styled.Text<AuthButtonProps>`
   font-family: ${({ theme }) => theme.fonts.italicBold};
   font-size: 24px;
   color: ${props =>

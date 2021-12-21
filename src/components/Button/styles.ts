@@ -1,11 +1,7 @@
 import styled from 'styled-components/native';
+import { DefaultButton } from '@interfaces/ButtonProps';
 
-interface ButtonProps {
-  color: string;
-  type: 'edit' | 'save' | 'default';
-}
-
-export const Container = styled.View<ButtonProps>`
+export const Container = styled.View<DefaultButton>`
   border-radius: 10px;
   border-width: 2px;
   border-color: ${props => props.color};
@@ -19,7 +15,7 @@ export const Container = styled.View<ButtonProps>`
     props.type === 'default' ? 'transparent' : props.color};
 `;
 
-export const Text = styled.Text<ButtonProps>`
+export const Text = styled.Text<DefaultButton>`
   font-family: ${({ theme }) => theme.fonts.medium};
   color: ${props => (props.type === 'default' ? props.color : '#FFF')};
   text-align: center;

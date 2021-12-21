@@ -1,4 +1,6 @@
 import React from 'react';
+
+import { ListGameProps } from '@interfaces/UIProps';
 import {
   Container,
   Numbers,
@@ -8,7 +10,13 @@ import {
   Content
 } from './styles';
 
-export const ListGame = ({ date, price, title, numbers, color }: any) => {
+export const ListGame = ({
+  date,
+  price,
+  title,
+  numbers,
+  color
+}: ListGameProps) => {
   return (
     <Container>
       <Marker color={color} />

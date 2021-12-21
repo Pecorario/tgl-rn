@@ -1,9 +1,5 @@
 import styled from 'styled-components/native';
-
-interface ButtonProps {
-  color: string;
-  active: boolean;
-}
+import { ButtonProps } from '@interfaces/ButtonProps';
 
 export const Container = styled.View<ButtonProps>`
   border-radius: 100px;

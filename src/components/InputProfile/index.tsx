@@ -1,27 +1,31 @@
 import React from 'react';
-import { TextInputProps } from 'react-native';
-import { Container, InputContent, Label, LabelContainer } from './styles';
 import { useTheme } from 'styled-components';
 
-interface InputProps extends TextInputProps {
-  value: string;
-  label: string;
-  editable: boolean;
-}
+import { InputProps } from '@interfaces/InputProps';
+import { Container, InputContent, Label, LabelContainer } from './styles';
 
-export function InputProfile({ value, label, editable, ...rest }: InputProps) {
+export function InputProfile({
+  value,
+  placeholder,
+  editable,
+  onChangeText,
+  keyboardType,
+  secureTextEntry
+}: InputProps) {
   const theme = useTheme();
 
   return (
     <Container editable={editable}>
       <LabelContainer>
-        <Label editable={editable}>{label}</Label>
+        <Label editable={editable}>{placeholder}</Label>
       </LabelContainer>
       <InputContent
-        {...rest}
         value={value}
+        onChangeText={onChangeText}
         editable={editable}
         placeholderTextColor={theme.colors.text_label}
+        keyboardType={keyboardType}
+        secureTextEntry={secureTextEntry}
       />
     </Container>
   );

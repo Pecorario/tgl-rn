@@ -1,8 +1,5 @@
 import styled from 'styled-components/native';
-
-interface InputProps {
-  editable: boolean;
-}
+import { InputProps } from '@interfaces/InputProps';
 
 export const Container = styled.View<InputProps>`
   padding: 2%;

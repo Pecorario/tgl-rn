@@ -1,21 +1,27 @@
 import React from 'react';
-import { TextInputProps, View } from 'react-native';
-import { Container, InputContent } from './styles';
 import { useTheme } from 'styled-components';
 
-interface InputProps extends TextInputProps {
-  value: string;
-}
+import { InputProps } from '@interfaces/InputProps';
+import { Container, InputContent } from './styles';
 
-export function Input({ value, ...rest }: InputProps) {
+export function Input({
+  value,
+  placeholder,
+  onChangeText,
+  keyboardType,
+  secureTextEntry
+}: InputProps) {
   const theme = useTheme();
 
   return (
     <Container>
       <InputContent
-        {...rest}
         value={value}
+        placeholder={placeholder}
+        onChangeText={onChangeText}
         placeholderTextColor={theme.colors.text_label}
+        keyboardType={keyboardType}
+        secureTextEntry={secureTextEntry}
       />
     </Container>
   );

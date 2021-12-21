@@ -1,7 +1,7 @@
 import React from 'react';
-import { ListGame } from '@components/ListGame';
+import { GameButton, ListGame } from '@components/index';
+
 import { Container, Title, List, Text, FiltersContainer } from './styles';
-import { GameButton } from '@components/GameButton';
 
 const DATA = [
   {
@@ -62,6 +62,15 @@ const DATA = [
   }
 ];
 
+interface GameProps {
+  id: string;
+  numbers: number[];
+  date: string;
+  price: number;
+  title: string;
+  color: string;
+}
+
 export function Home() {
   const renderItem = ({ item }: any) => (
     <ListGame
@@ -78,14 +87,29 @@ export function Home() {
       <Title>RECENT GAMES</Title>
       <Text>Filters</Text>
       <FiltersContainer>
-        <GameButton title="Lotofácil" color="#7F3992" onPress={() => {}} />
-        <GameButton title="Mega-Sena" color="#01AC66" onPress={() => {}} />
-        <GameButton title="Quina" color="#F79C31" onPress={() => {}} />
+        <GameButton
+          active={false}
+          title="Lotofácil"
+          color="#7F3992"
+          onPress={() => {}}
+        />
+        <GameButton
+          active={false}
+          title="Mega-Sena"
+          color="#01AC66"
+          onPress={() => {}}
+        />
+        <GameButton
+          active={false}
+          title="Quina"
+          color="#F79C31"
+          onPress={() => {}}
+        />
       </FiltersContainer>
       <List
         data={DATA}
         renderItem={renderItem}
-        keyExtractor={item => item.id}
+        keyExtractor={(item: any) => item.id}
       />
     </Container>
   );

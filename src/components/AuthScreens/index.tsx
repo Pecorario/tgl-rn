@@ -1,5 +1,9 @@
 import React from 'react';
 import { Keyboard, SafeAreaView, TouchableWithoutFeedback } from 'react-native';
+
+import { AuthButton } from '@components/index';
+
+import { AuthScreensProps } from '@interfaces/UIProps';
 import {
   Container,
   TitleContainer,
@@ -11,16 +15,6 @@ import {
   Footer,
   FooterText
 } from './styles';
-import { AuthButton } from '@components/AuthButton';
-
-interface AuthScreensProps {
-  children: React.ReactNode;
-  type: 'secondary' | 'tertiary';
-  textButtonInside: string;
-  textButtonOutside: string;
-  onPressInside: () => void;
-  onPressOutside: () => void;
-}
 
 export function AuthScreens({
   children,
@@ -47,13 +41,13 @@ export function AuthScreens({
             {children}
             <AuthButton
               onPress={onPressInside}
-              text={textButtonInside}
+              title={textButtonInside}
               type="primary"
             />
           </Box>
           <AuthButton
             onPress={onPressOutside}
-            text={textButtonOutside}
+            title={textButtonOutside}
             type={type}
           />
           <Footer>

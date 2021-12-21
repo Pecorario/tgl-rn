@@ -1,10 +1,7 @@
 import styled from 'styled-components/native';
+import { ButtonProps } from '@interfaces/ButtonProps';
 
-interface ActiveButton {
-  active: boolean;
-}
-
-export const Container = styled.View<ActiveButton>`
+export const Container = styled.View<ButtonProps>`
   flex: 1;
   justify-content: center;
   align-items: center;
@@ -15,6 +12,7 @@ export const Container = styled.View<ActiveButton>`
   height: 60px;
   border-radius: 30px;
   left: -30px;
-  background: ${props => (props.active ? '#27C383' : '#b5c401')};
+  background: ${props =>
+    props.active ? props.theme.colors.btn_primary : props.theme.colors.primary};
   elevation: 6;
 `;

@@ -7,8 +7,11 @@
       "@screens/*": ["./src/screens/*"],
       "@components/*": ["./src/components/*"],
       "@assets/*": ["./assets/*"],
-      "@global/*": ["./src/global/*"]
-    }
+      "@styles/*": ["./src/global/styles/*"],
+      "@helpers/*": ["./src/global/helpers/*"],
+      "@interfaces/*": ["./src/global/interfaces/*"],
+      "@navigation/*": ["./src/navigation/*"]
+    },
   },
   "exclude": ["node_modules", "dist"]
 }

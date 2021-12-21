@@ -2,7 +2,7 @@ import styled from 'styled-components/native';
 
 export const Container = styled.View`
   padding: 5%;
-  background: #f7f7f7;
+  background: ${({ theme }) => theme.colors.background_primary};
 `;
 
 export const Title = styled.Text`

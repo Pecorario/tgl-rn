@@ -1,17 +1,11 @@
 import React from 'react';
 import { TouchableOpacity } from 'react-native';
+import { FontAwesome5, MaterialCommunityIcons } from '@expo/vector-icons';
+
+import { DefaultButton } from '@interfaces/ButtonProps';
 import { Container, Text } from './styles';
-import { FontAwesome5 } from '@expo/vector-icons';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
 
-interface ButtonProps {
-  type: 'edit' | 'save' | 'default';
-  title: string;
-  color: string;
-  onPress: () => void;
-}
-
-export function Button({ type, title, color, onPress }: ButtonProps) {
+export function Button({ type, title, color, onPress }: DefaultButton) {
   return (
     <TouchableOpacity onPress={onPress}>
       <Container type={type} color={color}>
