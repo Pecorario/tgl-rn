@@ -1,16 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-interface notificationProps {
+interface NotificationProps {
   status: string;
   title: string;
   message: string;
 }
 
-interface uiProps {
-  notification: notificationProps | null;
+interface UiProps {
+  notification: NotificationProps | null;
 }
 
-const initialState: uiProps = {
+const initialState: UiProps = {
   notification: null
 };
 

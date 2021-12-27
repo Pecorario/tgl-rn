@@ -1,5 +1,6 @@
 import { Dispatch } from 'redux';
 import { authActions } from './auth-slice';
+import { fetchGamesData } from './game-actions';
 import { uiActions } from './ui-slice';
 
 interface UserProps {

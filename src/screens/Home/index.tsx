@@ -1,93 +1,52 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { GameButton, ListGame } from '@components/index';
 
 import { Container, Title, List, Text, FiltersContainer } from './styles';
-
-const DATA = [
-  {
-    id: Math.random().toString(),
-    date: '30/11/2021',
-    price: 'R$2,50',
-    title: 'Megasena',
-    numbers: '01, 02, 03, 04, 05, 06, 07, 08, 09, 10, 11, 12, 13, 14, 15, 16',
-    color: '#35A45E'
-  },
-  {
-    id: Math.random().toString(),
-    date: '30/11/2021',
-    price: 'R$2,50',
-    title: 'Lotofácil',
-    numbers: '01, 02, 03, 04, 05, 06, 07, 08, 09, 10, 11, 12, 13, 14, 15, 16',
-    color: '#35A45E'
-  },
-  {
-    id: Math.random().toString(),
-    date: '30/11/2021',
-    price: 'R$2,50',
-    title: 'Lotofácil',
-    numbers: '01, 02, 03, 04, 05, 06, 07, 08, 09, 10, 11, 12, 13, 14, 15, 16',
-    color: '#35A45E'
-  },
-  {
-    id: Math.random().toString(),
-    date: '30/11/2021',
-    price: 'R$2,50',
-    title: 'Lotofácil',
-    numbers: '01, 02, 03, 04, 05, 06, 07, 08, 09, 10, 11, 12, 13, 14, 15, 16',
-    color: '#35A45E'
-  },
-  {
-    id: Math.random().toString(),
-    date: '30/11/2021',
-    price: 'R$2,50',
-    title: 'Lotofácil',
-    numbers: '01, 02, 03, 04, 05, 06, 07, 08, 09, 10, 11, 12, 13, 14, 15, 16',
-    color: '#35A45E'
-  },
-  {
-    id: Math.random().toString(),
-    date: '30/11/2021',
-    price: 'R$2,50',
-    title: 'Lotofácil',
-    numbers: '01, 02, 03, 04, 05, 06, 07, 08, 09, 10, 11, 12, 13, 14, 15, 16',
-    color: '#4D32F5'
-  },
-  {
-    id: Math.random().toString(),
-    date: '30/11/2021',
-    price: 'R$2,50',
-    title: 'Lotofácil',
-    numbers: '01, 02, 03, 04, 05, 06, 07, 08, 09, 10, 11, 12, 13, 14, 15, 16',
-    color: '#41123C'
-  }
-];
-
-interface GameProps {
-  id: string;
-  numbers: number[];
-  date: string;
-  price: number;
-  title: string;
-  color: string;
-}
+import { fetchGamesData } from '@store/game-actions';
+import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
 
 export function Home() {
+  const dispatch = useDispatch();
+  const types = useSelector((state: RootStateOrAny) => state.game.types);
+
+  // const renderItem = ({ item }: any) => (
+  //   <ListGame
+  //     numbers={item.numbers}
+  //     date={item.date}
+  //     price={item.price}
+  //     title={item.title}
+  //     color={item.color}
+  //   />
+  // );
+
   const renderItem = ({ item }: any) => (
-    <ListGame
-      numbers={item.numbers}
-      date={item.date}
-      price={item.price}
-      title={item.title}
+    <GameButton
+      active={item.selected}
+      title={item.name}
       color={item.color}
+      onPress={() => {}}
     />
   );
+
+  useEffect(() => {
+    dispatch(fetchGamesData());
+    console.log(types);
+  }, []);
 
   return (
     <Container>
       <Title>RECENT GAMES</Title>
       <Text>Filters</Text>
-      <FiltersContainer>
-        <GameButton
+      <FiltersContainer
+        data={types}
+        renderItem={renderItem}
+        keyExtractor={(item: any) => item.id}
+        contentContainerStyle={{
+          flexDirection: 'row',
+          justifyContent: 'space-around'
+        }}
+      />
+      {/* <GameButton
           active={false}
           title="Lotofácil"
           color="#7F3992"
@@ -105,12 +64,12 @@ export function Home() {
           color="#F79C31"
           onPress={() => {}}
         />
-      </FiltersContainer>
-      <List
+      </FiltersContainer> */}
+      {/* <List
         data={DATA}
         renderItem={renderItem}
         keyExtractor={(item: any) => item.id}
-      />
+      /> */}
     </Container>
   );
 }

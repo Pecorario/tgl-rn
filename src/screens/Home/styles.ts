@@ -21,9 +21,9 @@ export const List = styled.FlatList`
   margin-bottom: 20%;
 `;
 
-export const FiltersContainer = styled.View`
-  flex-direction: row;
+export const FiltersContainer = styled.FlatList`
+  /* flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: space-around; */
   margin: 2% 0;
 `;

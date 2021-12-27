@@ -1,11 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { GameProps } from '@models/GameProps';
 
-interface InitialStateProps {
-  cartIsOpen: boolean;
-}
-
-const initialState: InitialStateProps = {
-  cartIsOpen: false
+const initialState: GameProps = {
+  cartIsOpen: false,
+  types: [],
+  minCartValue: 0
 };
 
 const gameSlice = createSlice({
@@ -17,6 +16,10 @@ const gameSlice = createSlice({
     },
     onModalClose(state) {
       state.cartIsOpen = false;
+    },
+    addGames(state, action) {
+      state.minCartValue = action.payload.minCartValue;
+      state.types = action.payload.types;
     }
   }
 });
