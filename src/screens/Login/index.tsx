@@ -19,12 +19,10 @@ export function Login({ navigation }: RouteProps) {
   };
 
   const onBack = () => {
-    console.log('Back');
     navigation.navigate('Registration');
   };
 
   useEffect(() => {
-    console.log('oq recebe aqui?:', user);
     if (user !== null) {
       navigation.navigate('Logged');
     }

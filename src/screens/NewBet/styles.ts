@@ -5,6 +5,7 @@ export const Container = styled.View`
   padding: 5%;
   padding-bottom: 0;
   background: ${({ theme }) => theme.colors.background_primary};
+  justify-content: space-between;
 `;
 
 export const TitleContainer = styled.View`
@@ -31,11 +32,15 @@ export const TitleGame = styled.Text`
   font-size: 16px;
 `;
 
-export const FiltersContainer = styled.View`
-  flex-direction: row;
+export const FiltersContainer = styled.FlatList`
+  /* flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-around;
-  margin: 2% 0;
+  justify-content: space-around; */
+  height: 10%;
+`;
+
+export const DetailsContainer = styled.View`
+  margin-top: 2%;
 `;
 
 export const TextGame = styled.Text`

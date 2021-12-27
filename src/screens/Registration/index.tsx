@@ -9,12 +9,10 @@ export function Registration({ navigation }: RouteProps) {
   const [password, setPassword] = useState('');
 
   const onSend = () => {
-    console.log(name, email, password);
     navigation.navigate('Login');
   };
 
   const onBack = () => {
-    console.log('Back');
     navigation.navigate('Login');
   };
 

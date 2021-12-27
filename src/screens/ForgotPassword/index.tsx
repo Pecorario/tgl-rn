@@ -12,7 +12,6 @@ export function ForgotPassword({ navigation }: RouteProps) {
   };
 
   const onBack = () => {
-    console.log('Back');
     navigation.navigate('Login');
   };
 

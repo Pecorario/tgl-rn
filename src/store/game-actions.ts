@@ -35,7 +35,7 @@ export const fetchGamesData = () => {
       });
 
       dispatch(
-        gameActions.addGames({
+        gameActions.addTypes({
           minCartValue: gamesData['min-cart-value'],
           types: loadedGames
         })

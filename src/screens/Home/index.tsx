@@ -19,7 +19,7 @@ export function Home() {
   //   />
   // );
 
-  const renderItem = ({ item }: any) => (
+  const renderGame = ({ item }: any) => (
     <GameButton
       active={item.selected}
       title={item.name}
@@ -30,7 +30,6 @@ export function Home() {
 
   useEffect(() => {
     dispatch(fetchGamesData());
-    console.log(types);
   }, []);
 
   return (
@@ -39,7 +38,7 @@ export function Home() {
       <Text>Filters</Text>
       <FiltersContainer
         data={types}
-        renderItem={renderItem}
+        renderItem={renderGame}
         keyExtractor={(item: any) => item.id}
         contentContainerStyle={{
           flexDirection: 'row',
