@@ -53,10 +53,7 @@ export function Logged() {
         },
         headerTitle: 'TGL',
         headerRight: () => (
-          <HeaderButtons
-            color="#707070"
-            onPress={() => navigation.navigate('Login')}
-          />
+          <HeaderButtons color="#707070" navigation={navigation} />
         )
       })}
     >

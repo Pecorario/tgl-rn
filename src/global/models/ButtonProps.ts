@@ -1,3 +1,5 @@
+import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
+
 export interface ButtonProps {
   title?: string;
   color?: string;
@@ -15,4 +17,8 @@ export interface DefaultButton extends ButtonProps {
 
 export interface NumberButtonProps extends ButtonProps {
   number: number;
+}
+
+export interface ButtonHeaderProps extends ButtonProps {
+  navigation?: BottomTabNavigationProp<any, any>;
 }

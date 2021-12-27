@@ -1,23 +1,34 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { TouchableOpacity } from 'react-native';
+import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
+
 import { AuthScreens, Input } from '@components/index';
 
 import { RouteProps } from '@models/RoutesProps';
 import { Link, TextLink } from './styles';
+import { sendLogin } from '@store/auth-actions';
 
 export function Login({ navigation }: RouteProps) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const dispatch = useDispatch();
+  const user = useSelector((state: RootStateOrAny) => state.auth.user);
 
   const onSend = () => {
-    console.log(email, password);
-    navigation.navigate('Logged');
+    dispatch(sendLogin({ email, password }));
   };
 
   const onBack = () => {
     console.log('Back');
     navigation.navigate('Registration');
   };
+
+  useEffect(() => {
+    console.log('oq recebe aqui?:', user);
+    if (user !== null) {
+      navigation.navigate('Logged');
+    }
+  }, [user]);
 
   return (
     <AuthScreens
