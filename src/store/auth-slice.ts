@@ -3,7 +3,8 @@ import { AuthProps } from '@models/AuthProps';
 
 const initialState: AuthProps = {
   user: null,
-  tokenPassword: ''
+  tokenPassword: '',
+  message: ''
 };
 
 const authSlice = createSlice({
@@ -38,6 +39,14 @@ const authSlice = createSlice({
     },
     removeToken(state) {
       state.tokenPassword = '';
+    },
+    addMessage(state, action) {
+      const msg = action.payload.message;
+
+      state.message = msg;
+    },
+    removeMessage(state) {
+      state.message = '';
     }
   }
 });

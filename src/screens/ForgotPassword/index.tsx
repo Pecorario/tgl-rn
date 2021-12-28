@@ -14,18 +14,33 @@ export function ForgotPassword({ navigation }: RouteProps) {
   const token = useSelector(
     (state: RootStateOrAny) => state.auth.tokenPassword
   );
+  const messageRdx = useSelector((state: RootStateOrAny) => state.auth.message);
+  const [message, setMessage] = useState('');
 
   useEffect(() => {
     if (token !== '') {
       setHasToken(true);
     } else {
       setHasToken(false);
+      {
+        messageRdx !== '' && setMessage(messageRdx);
+      }
     }
   }, [token]);
 
   const onSend = () => {
     if (!hasToken) {
-      dispatch(getToken({ email }));
+      let regex_validation =
+        /^([a-z]){1,}([a-z0-9._-]){1,}([@]){1}([a-z]){2,}([.]){1}([a-z]){2,}([.]?){1}([a-z]?){2,}$/i;
+
+      console.log('É válido? ', regex_validation.test(email));
+
+      if (email.trim().length > 0 && regex_validation.test(email)) {
+        setMessage('');
+        dispatch(getToken({ email }));
+      } else {
+        setMessage('Email inválido.');
+      }
     } else {
       dispatch(updatePassword({ token, password }));
       navigation.navigate('Login');
@@ -54,6 +69,7 @@ export function ForgotPassword({ navigation }: RouteProps) {
           onChangeText={setEmail}
           value={email}
           keyboardType="email-address"
+          message={message}
         />
       ) : (
         <Input
@@ -61,6 +77,7 @@ export function ForgotPassword({ navigation }: RouteProps) {
           onChangeText={setPassword}
           value={password}
           secureTextEntry={true}
+          message=""
         />
       )}
     </AuthScreens>

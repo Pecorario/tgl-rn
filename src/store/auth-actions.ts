@@ -1,7 +1,7 @@
 import { Dispatch } from 'redux';
 import { authActions } from './auth-slice';
-import { uiActions } from './ui-slice';
 import { UserProps } from '@models/AuthProps';
+import Toast from 'react-native-toast-message';
 
 export const sendLogin = ({ email, password }: UserProps) => {
   return async (dispatch: Dispatch) => {
@@ -21,11 +21,18 @@ export const sendLogin = ({ email, password }: UserProps) => {
       const data = await response.json();
 
       if (!response.ok) {
+        Toast.show({
+          type: 'error',
+          text1: 'A requisição falhou.'
+        });
+
         throw new Error('Login failed!');
       }
 
       return data;
     };
+
+    dispatch(authActions.removeMessage());
 
     try {
       const { user, token } = await sendRequest();
@@ -39,22 +46,9 @@ export const sendLogin = ({ email, password }: UserProps) => {
           token: token.token
         })
       );
-
-      dispatch(
-        uiActions.showNotification({
-          status: 'success',
-          title: 'Success!',
-          message: 'Logged successfully!'
-        })
-      );
     } catch (error) {
-      dispatch(
-        uiActions.showNotification({
-          status: 'error',
-          title: 'Error!',
-          message: 'Senha e/ou e-mail inválidos'
-        })
-      );
+      const message = 'Email e/ou senha inválidos';
+      dispatch(authActions.addMessage({ message }));
       console.log(error);
     }
   };
@@ -78,6 +72,11 @@ export const getUserData = ({ token }: UserProps) => {
       const data = await response.json();
 
       if (!response.ok) {
+        Toast.show({
+          type: 'error',
+          text1: 'A requisição falhou.'
+        });
+
         throw new Error('GetUserData failed!');
       }
 
@@ -93,22 +92,12 @@ export const getUserData = ({ token }: UserProps) => {
           email: email
         })
       );
-
-      dispatch(
-        uiActions.showNotification({
-          status: 'success',
-          title: 'Success!',
-          message: 'Dados recebidos com sucesso!'
-        })
-      );
     } catch (error) {
-      dispatch(
-        uiActions.showNotification({
-          status: 'error',
-          title: 'Error!',
-          message: 'Erro ao procurar dados'
-        })
-      );
+      Toast.show({
+        type: 'error',
+        text1: 'Algo inesperado aconteceu.',
+        text2: 'Tente novamente mais tarde.'
+      });
       console.log(error);
     }
   };
@@ -133,6 +122,11 @@ export const updateUserData = ({ name, email, token }: UserProps) => {
       const data = await response.json();
 
       if (!response.ok) {
+        Toast.show({
+          type: 'error',
+          text1: 'A requisição falhou.'
+        });
+
         throw new Error('Update User failed!');
       }
 
@@ -149,21 +143,16 @@ export const updateUserData = ({ name, email, token }: UserProps) => {
         })
       );
 
-      dispatch(
-        uiActions.showNotification({
-          status: 'success',
-          title: 'Success!',
-          message: 'Alteração dos dados bem sucedida!'
-        })
-      );
+      Toast.show({
+        type: 'success',
+        text1: 'Alteração feita com sucesso!'
+      });
     } catch (error) {
-      dispatch(
-        uiActions.showNotification({
-          status: 'error',
-          title: 'Error!',
-          message: 'Alteração inválida'
-        })
-      );
+      Toast.show({
+        type: 'error',
+        text1: 'Algo inesperado aconteceu.',
+        text2: 'Tente novamente mais tarde.'
+      });
       console.log(error);
     }
   };
@@ -186,11 +175,16 @@ export const getToken = ({ email }: UserProps) => {
       const data = await response.json();
 
       if (!response.ok) {
+        Toast.show({
+          type: 'error',
+          text1: 'A requisição falhou.'
+        });
         throw new Error('Get token failed!');
       }
 
       return data;
     };
+    dispatch(authActions.removeMessage());
 
     try {
       const { token } = await sendRequest();
@@ -200,22 +194,9 @@ export const getToken = ({ email }: UserProps) => {
           token
         })
       );
-
-      dispatch(
-        uiActions.showNotification({
-          status: 'success',
-          title: 'Success!',
-          message: 'Token adicionado!'
-        })
-      );
     } catch (error) {
-      dispatch(
-        uiActions.showNotification({
-          status: 'error',
-          title: 'Error!',
-          message: 'Token inválido'
-        })
-      );
+      const message = 'Email não encontrado.';
+      dispatch(authActions.addMessage({ message }));
       console.log(error);
     }
   };
@@ -238,6 +219,11 @@ export const updatePassword = ({ token, password }: UserProps) => {
       // const data = await response.json();
 
       if (!response.ok) {
+        Toast.show({
+          type: 'error',
+          text1: 'A requisição falhou.'
+        });
+
         throw new Error('Update User failed!');
       }
 
@@ -246,24 +232,18 @@ export const updatePassword = ({ token, password }: UserProps) => {
 
     try {
       await sendRequest();
-
       dispatch(authActions.removeToken());
 
-      dispatch(
-        uiActions.showNotification({
-          status: 'success',
-          title: 'Success!',
-          message: 'Alteração dos dados bem sucedida!'
-        })
-      );
+      Toast.show({
+        type: 'success',
+        text1: 'Senha alterada com sucesso!'
+      });
     } catch (error) {
-      dispatch(
-        uiActions.showNotification({
-          status: 'error',
-          title: 'Error!',
-          message: 'Alteração inválida'
-        })
-      );
+      Toast.show({
+        type: 'error',
+        text1: 'Algo inesperado aconteceu.',
+        text2: 'Tente novamente mais tarde.'
+      });
       console.log(error);
     }
   };
@@ -288,6 +268,11 @@ export const createUser = ({ email, password, name }: UserProps) => {
       const data = await response.json();
 
       if (!response.ok) {
+        Toast.show({
+          type: 'error',
+          text1: 'A requisição falhou.'
+        });
+
         throw new Error('Login failed!');
       }
 
@@ -296,15 +281,16 @@ export const createUser = ({ email, password, name }: UserProps) => {
 
     try {
       await sendRequest();
-
-      dispatch(
-        uiActions.showNotification({
-          status: 'success',
-          title: 'Success!',
-          message: 'Conta criada com sucesso!'
-        })
-      );
+      Toast.show({
+        type: 'success',
+        text1: 'Usuário criado com sucesso!'
+      });
     } catch (error) {
+      Toast.show({
+        type: 'error',
+        text1: 'Algo inesperado aconteceu.',
+        text2: 'Tente novamente mais tarde.'
+      });
       console.log(error);
     }
   };

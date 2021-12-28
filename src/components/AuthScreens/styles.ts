@@ -48,6 +48,11 @@ export const Box = styled.View`
   margin-top: 5%;
 `;
 
+export const Warning = styled.Text`
+  margin-top: 2%;
+  color: red;
+`;
+
 export const Footer = styled.View`
   position: absolute;
   bottom: 2%;

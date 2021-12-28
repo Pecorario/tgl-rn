@@ -7,18 +7,44 @@ import { AuthScreens, Input } from '@components/index';
 import { RouteProps } from '@models/RoutesProps';
 import { Link, TextLink } from './styles';
 import { sendLogin } from '@store/auth-actions';
+import { authActions } from '@store/auth-slice';
 
 export function Login({ navigation }: RouteProps) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
   const user = useSelector((state: RootStateOrAny) => state.auth.user);
+  const message = useSelector((state: RootStateOrAny) => state.auth.message);
+
+  useEffect(() => {
+    dispatch(authActions.removeMessage());
+  }, []);
 
   const onSend = () => {
-    dispatch(sendLogin({ email, password }));
+    if (email.trim() === '' || password.trim() === '') {
+      dispatch(
+        authActions.addMessage({
+          message: 'Todos os campos devem ser preenchidos.'
+        })
+      );
+    } else {
+      setEmail('');
+      setPassword('');
+      dispatch(sendLogin({ email, password }));
+    }
   };
 
-  const onBack = () => {
+  const emailChangeHandler = (text: string) => {
+    setEmail(text);
+    dispatch(authActions.removeMessage());
+  };
+
+  const passwordChangeHandler = (text: string) => {
+    setPassword(text);
+    dispatch(authActions.removeMessage());
+  };
+
+  const toRegistration = () => {
     navigation.navigate('Registration');
   };
 
@@ -32,19 +58,20 @@ export function Login({ navigation }: RouteProps) {
     <AuthScreens
       type="secondary"
       onPressInside={onSend}
-      onPressOutside={onBack}
+      onPressOutside={toRegistration}
       textButtonInside="Log In"
       textButtonOutside="Sign Up"
+      message={message}
     >
       <Input
         placeholder="Email"
-        onChangeText={setEmail}
+        onChangeText={emailChangeHandler}
         value={email}
         keyboardType="email-address"
       />
       <Input
         placeholder="Password"
-        onChangeText={setPassword}
+        onChangeText={passwordChangeHandler}
         value={password}
         secureTextEntry={true}
       />

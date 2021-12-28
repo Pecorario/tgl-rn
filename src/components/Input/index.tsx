@@ -2,14 +2,15 @@ import React from 'react';
 import { useTheme } from 'styled-components';
 
 import { InputProps } from '@models/InputProps';
-import { Container, InputContent } from './styles';
+import { Container, InputContent, Warning } from './styles';
 
 export function Input({
   value,
   placeholder,
   onChangeText,
   keyboardType,
-  secureTextEntry
+  secureTextEntry,
+  message
 }: InputProps) {
   const theme = useTheme();
 
@@ -22,7 +23,9 @@ export function Input({
         placeholderTextColor={theme.colors.text_label}
         keyboardType={keyboardType}
         secureTextEntry={secureTextEntry}
+        autoCapitalize="none"
       />
+      {message !== '' && <Warning>{message}</Warning>}
     </Container>
   );
 }

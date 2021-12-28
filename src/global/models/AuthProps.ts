@@ -14,4 +14,5 @@ export interface AuthProps {
     token: string;
   } | null;
   tokenPassword: string;
+  message: string;
 }

@@ -7,4 +7,5 @@ export interface InputProps extends TextInputProps {
   editable?: boolean;
   keyboardType?: KeyboardTypeOptions | undefined;
   secureTextEntry?: boolean | undefined;
+  message?: string;
 }

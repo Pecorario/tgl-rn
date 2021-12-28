@@ -26,6 +26,7 @@ export function InputProfile({
         placeholderTextColor={theme.colors.text_label}
         keyboardType={keyboardType}
         secureTextEntry={secureTextEntry}
+        autoCapitalize="none"
       />
     </Container>
   );

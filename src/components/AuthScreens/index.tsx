@@ -13,7 +13,8 @@ import {
   SeparatorText,
   Box,
   Footer,
-  FooterText
+  FooterText,
+  Warning
 } from './styles';
 
 export function AuthScreens({
@@ -22,7 +23,8 @@ export function AuthScreens({
   textButtonInside,
   textButtonOutside,
   onPressInside,
-  onPressOutside
+  onPressOutside,
+  message
 }: AuthScreensProps) {
   const year = new Date().getFullYear();
 
@@ -45,6 +47,7 @@ export function AuthScreens({
               type="primary"
             />
           </Box>
+          {message !== '' && <Warning>{message}</Warning>}
           <AuthButton
             onPress={onPressOutside}
             title={textButtonOutside}

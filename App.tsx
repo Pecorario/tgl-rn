@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import store from '@store/index';
 import theme from '@styles/theme';
 import { ThemeProvider } from 'styled-components';
+import Toast, { BaseToast, ErrorToast } from 'react-native-toast-message';
 import { Authentication } from '@navigation/Authentication';
 import {
   useFonts,
@@ -13,6 +14,39 @@ import {
   Roboto_700Bold,
   Roboto_500Medium
 } from '@expo-google-fonts/roboto';
+
+const toastConfig = {
+  success: (props: any) => (
+    <BaseToast
+      {...props}
+      style={{ borderLeftColor: '#3CB371', backgroundColor: '#3CB371' }}
+      contentContainerStyle={{ paddingHorizontal: 15 }}
+      text1Style={{
+        fontSize: 15,
+        fontWeight: '400',
+        color: 'white'
+      }}
+      text2Style={{
+        color: 'white'
+      }}
+    />
+  ),
+  error: (props: any) => (
+    <ErrorToast
+      {...props}
+      style={{ borderLeftColor: '#E74C3C', backgroundColor: '#E74C3C' }}
+      contentContainerStyle={{ paddingHorizontal: 15 }}
+      text1Style={{
+        fontSize: 15,
+        fontWeight: '400',
+        color: 'white'
+      }}
+      text2Style={{
+        color: 'white'
+      }}
+    />
+  )
+};
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -31,6 +65,7 @@ export default function App() {
       <ThemeProvider theme={theme}>
         <Authentication />
       </ThemeProvider>
+      <Toast config={toastConfig} />
     </Provider>
   );
 }

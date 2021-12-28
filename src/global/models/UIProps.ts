@@ -5,6 +5,7 @@ export interface AuthScreensProps {
   textButtonOutside: string;
   onPressInside: () => void;
   onPressOutside: () => void;
+  message?: string;
 }
 
 export interface ListGameProps {
