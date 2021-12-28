@@ -170,3 +170,108 @@ export const updateUserData = ({ name, email, token }: UserProps) => {
     }
   };
 };
+
+export const getToken = ({ email }: UserProps) => {
+  return async (dispatch: Dispatch) => {
+    const sendRequest = async () => {
+      const response = await fetch('http://192.168.0.106:3333/reset', {
+        method: 'POST',
+        body: JSON.stringify({
+          email: email
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json'
+        }
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error('Get token failed!');
+      }
+
+      return data;
+    };
+
+    try {
+      const { token } = await sendRequest();
+      console.log('Token:', token);
+
+      dispatch(
+        authActions.addToken({
+          token
+        })
+      );
+
+      dispatch(
+        uiActions.showNotification({
+          status: 'success',
+          title: 'Success!',
+          message: 'Token adicionado!'
+        })
+      );
+    } catch (error) {
+      dispatch(
+        uiActions.showNotification({
+          status: 'error',
+          title: 'Error!',
+          message: 'Token inválido'
+        })
+      );
+      console.log(error);
+    }
+  };
+};
+
+export const updatePassword = ({ token, password }: UserProps) => {
+  console.log('que token chegou?', token);
+  const url = `http://192.168.0.106:3333/reset/${token}`;
+  console.log('url:', url);
+  return async (dispatch: Dispatch) => {
+    const sendRequest = async () => {
+      const response = await fetch(url, {
+        method: 'POST',
+        body: JSON.stringify({
+          password: password
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json'
+        }
+      });
+
+      // const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error('Update User failed!');
+      }
+
+      // return data;
+    };
+
+    try {
+      await sendRequest();
+      // console.log('UserData:', user);
+
+      dispatch(authActions.removeToken());
+
+      dispatch(
+        uiActions.showNotification({
+          status: 'success',
+          title: 'Success!',
+          message: 'Alteração dos dados bem sucedida!'
+        })
+      );
+    } catch (error) {
+      dispatch(
+        uiActions.showNotification({
+          status: 'error',
+          title: 'Error!',
+          message: 'Alteração inválida'
+        })
+      );
+      console.log(error);
+    }
+  };
+};

@@ -1,18 +1,43 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { AuthScreens, Input } from '@components/index';
+import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
+import { getToken, updatePassword } from '@store/auth-actions';
 
 import { RouteProps } from '@models/RoutesProps';
+import { authActions } from '@store/auth-slice';
 
 export function ForgotPassword({ navigation }: RouteProps) {
   const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [hasToken, setHasToken] = useState(false);
+  const dispatch = useDispatch();
+  const token = useSelector(
+    (state: RootStateOrAny) => state.auth.tokenPassword
+  );
+
+  useEffect(() => {
+    if (token !== '') {
+      setHasToken(true);
+    } else {
+      setHasToken(false);
+    }
+  }, [token]);
 
   const onSend = () => {
-    console.log(email);
-    navigation.navigate('Login');
+    if (!hasToken) {
+      dispatch(getToken({ email }));
+    } else {
+      dispatch(updatePassword({ token, password }));
+      navigation.navigate('Login');
+    }
   };
 
   const onBack = () => {
-    navigation.navigate('Login');
+    if (!hasToken) {
+      navigation.navigate('Login');
+    } else {
+      dispatch(authActions.removeToken());
+    }
   };
 
   return (
@@ -20,15 +45,24 @@ export function ForgotPassword({ navigation }: RouteProps) {
       type="tertiary"
       onPressInside={onSend}
       onPressOutside={onBack}
-      textButtonInside="Send Link"
+      textButtonInside="Send"
       textButtonOutside="Back"
     >
-      <Input
-        placeholder="Email"
-        onChangeText={setEmail}
-        value={email}
-        keyboardType="email-address"
-      />
+      {!hasToken ? (
+        <Input
+          placeholder="Email"
+          onChangeText={setEmail}
+          value={email}
+          keyboardType="email-address"
+        />
+      ) : (
+        <Input
+          placeholder="Password"
+          onChangeText={setPassword}
+          value={password}
+          secureTextEntry={true}
+        />
+      )}
     </AuthScreens>
   );
 }

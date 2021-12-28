@@ -2,7 +2,8 @@ import { createSlice } from '@reduxjs/toolkit';
 import { AuthProps } from '@models/AuthProps';
 
 const initialState: AuthProps = {
-  user: null
+  user: null,
+  tokenPassword: ''
 };
 
 const authSlice = createSlice({
@@ -32,6 +33,16 @@ const authSlice = createSlice({
         state.user.name = name;
         state.user.email = email;
       }
+    },
+    addToken(state, action) {
+      const token = action.payload;
+
+      state.tokenPassword = token.token;
+
+      console.log('dentro aqui de como chegou:', state.tokenPassword);
+    },
+    removeToken(state) {
+      state.tokenPassword = '';
     }
   }
 });
