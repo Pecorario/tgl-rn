@@ -86,7 +86,6 @@ export const getUserData = ({ token }: UserProps) => {
 
     try {
       const { name, email } = await sendRequest();
-      console.log('Chegou oq aqui:', name, email);
 
       dispatch(
         authActions.updateAccount({
@@ -142,7 +141,6 @@ export const updateUserData = ({ name, email, token }: UserProps) => {
 
     try {
       const { email, name } = await sendRequest();
-      // console.log('UserData:', user);
 
       dispatch(
         authActions.updateAccount({
@@ -196,7 +194,6 @@ export const getToken = ({ email }: UserProps) => {
 
     try {
       const { token } = await sendRequest();
-      console.log('Token:', token);
 
       dispatch(
         authActions.addToken({
@@ -225,12 +222,9 @@ export const getToken = ({ email }: UserProps) => {
 };
 
 export const updatePassword = ({ token, password }: UserProps) => {
-  console.log('que token chegou?', token);
-  const url = `http://192.168.0.106:3333/reset/${token}`;
-  console.log('url:', url);
   return async (dispatch: Dispatch) => {
     const sendRequest = async () => {
-      const response = await fetch(url, {
+      const response = await fetch(`http://192.168.0.106:3333/reset/${token}`, {
         method: 'POST',
         body: JSON.stringify({
           password: password
@@ -252,7 +246,6 @@ export const updatePassword = ({ token, password }: UserProps) => {
 
     try {
       await sendRequest();
-      // console.log('UserData:', user);
 
       dispatch(authActions.removeToken());
 
@@ -271,6 +264,47 @@ export const updatePassword = ({ token, password }: UserProps) => {
           message: 'Alteração inválida'
         })
       );
+      console.log(error);
+    }
+  };
+};
+
+export const createUser = ({ email, password, name }: UserProps) => {
+  return async (dispatch: Dispatch) => {
+    const sendRequest = async () => {
+      const response = await fetch('http://192.168.0.106:3333/user/create', {
+        method: 'POST',
+        body: JSON.stringify({
+          email: email,
+          password: password,
+          name: name
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json'
+        }
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error('Login failed!');
+      }
+
+      return data;
+    };
+
+    try {
+      await sendRequest();
+
+      dispatch(
+        uiActions.showNotification({
+          status: 'success',
+          title: 'Success!',
+          message: 'Conta criada com sucesso!'
+        })
+      );
+    } catch (error) {
       console.log(error);
     }
   };

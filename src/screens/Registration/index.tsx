@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
+import { createUser } from '@store/auth-actions';
 import { AuthScreens, Input } from '@components/index';
 
 import { RouteProps } from '@models/RoutesProps';
@@ -7,13 +9,22 @@ export function Registration({ navigation }: RouteProps) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const dispatch = useDispatch();
 
-  const onSend = () => {
+  const resetData = () => {
+    setEmail('');
+    setPassword('');
+    setName('');
     navigation.navigate('Login');
   };
 
+  const onSend = () => {
+    dispatch(createUser({ email, password, name }));
+    resetData();
+  };
+
   const onBack = () => {
-    navigation.navigate('Login');
+    resetData();
   };
 
   return (

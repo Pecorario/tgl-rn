@@ -20,8 +20,6 @@ const authSlice = createSlice({
         isAdmin,
         token
       };
-
-      // console.log('User tratado:', state.user);
     },
     onLogout(state) {
       state.user = null;
@@ -36,10 +34,7 @@ const authSlice = createSlice({
     },
     addToken(state, action) {
       const token = action.payload;
-
       state.tokenPassword = token.token;
-
-      console.log('dentro aqui de como chegou:', state.tokenPassword);
     },
     removeToken(state) {
       state.tokenPassword = '';
