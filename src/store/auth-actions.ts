@@ -1,17 +1,14 @@
 import { Dispatch } from 'redux';
 import { authActions } from './auth-slice';
-import { fetchGamesData } from './game-actions';
 import { uiActions } from './ui-slice';
-
-interface UserProps {
-  email: string;
-  password: string;
-}
+import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
+import { UserProps } from '@models/AuthProps';
 
 export const sendLogin = ({ email, password }: UserProps) => {
+  console.log(email, password);
   return async (dispatch: Dispatch) => {
     const sendRequest = async () => {
-      const response = await fetch('http://192.168.0.104:3333/login', {
+      const response = await fetch('http://192.168.0.106:3333/login', {
         method: 'POST',
         body: JSON.stringify({
           email: email,
@@ -20,6 +17,122 @@ export const sendLogin = ({ email, password }: UserProps) => {
         headers: {
           'Content-Type': 'application/json',
           Accept: 'application/json'
+        }
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error('Login failed!');
+      }
+
+      return data;
+    };
+
+    try {
+      const { user, token } = await sendRequest();
+      console.log('UserData:', user);
+
+      dispatch(
+        authActions.onLogin({
+          id: user.id,
+          name: user.name,
+          email: user.email,
+          isAdmin: user['is_admin'],
+          token: token.token
+        })
+      );
+
+      dispatch(
+        uiActions.showNotification({
+          status: 'success',
+          title: 'Success!',
+          message: 'Logged successfully!'
+        })
+      );
+    } catch (error) {
+      dispatch(
+        uiActions.showNotification({
+          status: 'error',
+          title: 'Error!',
+          message: 'Senha e/ou e-mail inválidos'
+        })
+      );
+      console.log(error);
+    }
+  };
+};
+
+export const getUserData = ({ token }: UserProps) => {
+  return async (dispatch: Dispatch) => {
+    const sendRequest = async () => {
+      const response = await fetch(
+        'http://192.168.0.106:3333/user/my-account',
+        {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+            Authorization: 'Bearer ' + { token }
+          }
+        }
+      );
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error('GetUserData failed!');
+      }
+
+      return data;
+    };
+
+    try {
+      const { name, email } = await sendRequest();
+      // console.log('UserData:', user);
+
+      dispatch(
+        authActions.updateAccount({
+          name: name,
+          email: email
+        })
+      );
+
+      dispatch(
+        uiActions.showNotification({
+          status: 'success',
+          title: 'Success!',
+          message: 'Dados recebidos com sucesso!'
+        })
+      );
+    } catch (error) {
+      dispatch(
+        uiActions.showNotification({
+          status: 'error',
+          title: 'Error!',
+          message: 'Erro ao procurar dados'
+        })
+      );
+      console.log(error);
+    }
+  };
+};
+
+export const updateUserData = ({ name, email }: UserProps) => {
+  const { token } = useSelector((state: RootStateOrAny) => state.auth.user);
+
+  return async (dispatch: Dispatch) => {
+    const sendRequest = async () => {
+      const response = await fetch('http://192.168.0.106:3333/user/update', {
+        method: 'PUT',
+        body: JSON.stringify({
+          name: name,
+          email: email
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+          Authorization: 'Bearer ' + { token }
         }
       });
 

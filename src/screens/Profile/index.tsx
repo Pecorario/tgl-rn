@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Keyboard, TouchableWithoutFeedback } from 'react-native';
 import { useTheme } from 'styled-components';
 import { Button, InputProfile } from '@components/index';
+import { getUserData } from '@store/auth-actions';
+import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
 
 import { Container, Box, ContainerButtons } from './styles';
 
@@ -9,9 +11,15 @@ export function Profile() {
   const [isEdit, setIsEdit] = useState(false);
   const [name, setName] = useState('Taynara Pecorario');
   const [email, setEmail] = useState('taynara@gmail.com');
-  const [password, setPassword] = useState('12345678');
+  // const [password, setPassword] = useState('12345678');
 
+  const dispatch = useDispatch();
+  const user = useSelector((state: RootStateOrAny) => state.auth.user);
   const theme = useTheme();
+
+  useEffect(() => {
+    dispatch(getUserData({ token: user.token }));
+  });
 
   const saveEditHandler = () => {
     alert('Saved');
@@ -46,13 +54,13 @@ export function Profile() {
                 onChangeText={setEmail}
                 editable={true}
               />
-              <InputProfile
+              {/* <InputProfile
                 placeholder="Password"
                 value={password}
                 onChangeText={setPassword}
                 secureTextEntry={true}
                 editable={true}
-              />
+              /> */}
             </Box>
             <ContainerButtons>
               <Button
@@ -72,18 +80,22 @@ export function Profile() {
         ) : (
           <>
             <Box>
-              <InputProfile placeholder="Name" value={name} editable={false} />
               <InputProfile
-                placeholder="Email"
-                value={email}
+                placeholder="Name"
+                value={user?.name}
                 editable={false}
               />
               <InputProfile
+                placeholder="Email"
+                value={user?.email}
+                editable={false}
+              />
+              {/* <InputProfile
                 placeholder="Password"
                 value={password}
                 editable={false}
                 secureTextEntry={true}
-              />
+              /> */}
             </Box>
             <ContainerButtons>
               <Button

@@ -5,7 +5,7 @@ import { TypeProps } from '@models/GameProps';
 export const fetchGamesData = () => {
   return async (dispatch: Dispatch) => {
     const fetchData = async () => {
-      const response = await fetch('http://192.168.0.104:3333/cart_games');
+      const response = await fetch('http://192.168.0.106:3333/cart_games');
 
       if (!response.ok) {
         throw new Error('Something went wrong!');

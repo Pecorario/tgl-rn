@@ -1,14 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-
-interface AuthProps {
-  user: {
-    id: number;
-    email: string;
-    isAdmin: number;
-    name: string;
-    token: string;
-  } | null;
-}
+import { AuthProps } from '@models/AuthProps';
 
 const initialState: AuthProps = {
   user: null
@@ -33,6 +24,14 @@ const authSlice = createSlice({
     },
     onLogout(state) {
       state.user = null;
+    },
+    updateAccount(state, action) {
+      const { name, email } = action.payload;
+
+      if (state.user !== null) {
+        state.user.name = 'FOI' + name;
+        state.user.email = email;
+      }
     }
   }
 });
