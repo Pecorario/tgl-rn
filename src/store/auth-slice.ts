@@ -29,7 +29,7 @@ const authSlice = createSlice({
       const { name, email } = action.payload;
 
       if (state.user !== null) {
-        state.user.name = 'FOI' + name;
+        state.user.name = name;
         state.user.email = email;
       }
     }

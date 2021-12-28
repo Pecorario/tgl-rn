@@ -1,11 +1,9 @@
 import { Dispatch } from 'redux';
 import { authActions } from './auth-slice';
 import { uiActions } from './ui-slice';
-import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
 import { UserProps } from '@models/AuthProps';
 
 export const sendLogin = ({ email, password }: UserProps) => {
-  console.log(email, password);
   return async (dispatch: Dispatch) => {
     const sendRequest = async () => {
       const response = await fetch('http://192.168.0.106:3333/login', {
@@ -31,7 +29,6 @@ export const sendLogin = ({ email, password }: UserProps) => {
 
     try {
       const { user, token } = await sendRequest();
-      console.log('UserData:', user);
 
       dispatch(
         authActions.onLogin({
@@ -73,7 +70,7 @@ export const getUserData = ({ token }: UserProps) => {
           headers: {
             'Content-Type': 'application/json',
             Accept: 'application/json',
-            Authorization: 'Bearer ' + { token }
+            Authorization: `Bearer ${token}`
           }
         }
       );
@@ -89,7 +86,7 @@ export const getUserData = ({ token }: UserProps) => {
 
     try {
       const { name, email } = await sendRequest();
-      // console.log('UserData:', user);
+      console.log('Chegou oq aqui:', name, email);
 
       dispatch(
         authActions.updateAccount({
@@ -118,44 +115,39 @@ export const getUserData = ({ token }: UserProps) => {
   };
 };
 
-export const updateUserData = ({ name, email }: UserProps) => {
-  const { token } = useSelector((state: RootStateOrAny) => state.auth.user);
-
+export const updateUserData = ({ name, email, token }: UserProps) => {
   return async (dispatch: Dispatch) => {
     const sendRequest = async () => {
       const response = await fetch('http://192.168.0.106:3333/user/update', {
         method: 'PUT',
         body: JSON.stringify({
-          name: name,
-          email: email
+          email: email,
+          name: name
         }),
         headers: {
           'Content-Type': 'application/json',
           Accept: 'application/json',
-          Authorization: 'Bearer ' + { token }
+          Authorization: `Bearer ${token}`
         }
       });
 
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error('Login failed!');
+        throw new Error('Update User failed!');
       }
 
       return data;
     };
 
     try {
-      const { user, token } = await sendRequest();
+      const { email, name } = await sendRequest();
       // console.log('UserData:', user);
 
       dispatch(
-        authActions.onLogin({
-          id: user.id,
-          name: user.name,
-          email: user.email,
-          isAdmin: user['is_admin'],
-          token: token.token
+        authActions.updateAccount({
+          name: name,
+          email: email
         })
       );
 
@@ -163,7 +155,7 @@ export const updateUserData = ({ name, email }: UserProps) => {
         uiActions.showNotification({
           status: 'success',
           title: 'Success!',
-          message: 'Logged successfully!'
+          message: 'Alteração dos dados bem sucedida!'
         })
       );
     } catch (error) {
@@ -171,7 +163,7 @@ export const updateUserData = ({ name, email }: UserProps) => {
         uiActions.showNotification({
           status: 'error',
           title: 'Error!',
-          message: 'Senha e/ou e-mail inválidos'
+          message: 'Alteração inválida'
         })
       );
       console.log(error);

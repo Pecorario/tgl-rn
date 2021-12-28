@@ -2,37 +2,38 @@ import React, { useEffect, useState } from 'react';
 import { Keyboard, TouchableWithoutFeedback } from 'react-native';
 import { useTheme } from 'styled-components';
 import { Button, InputProfile } from '@components/index';
-import { getUserData } from '@store/auth-actions';
+import { getUserData, updateUserData } from '@store/auth-actions';
 import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
 
 import { Container, Box, ContainerButtons } from './styles';
 
 export function Profile() {
   const [isEdit, setIsEdit] = useState(false);
-  const [name, setName] = useState('Taynara Pecorario');
-  const [email, setEmail] = useState('taynara@gmail.com');
   // const [password, setPassword] = useState('12345678');
-
   const dispatch = useDispatch();
   const user = useSelector((state: RootStateOrAny) => state.auth.user);
   const theme = useTheme();
 
+  const [name, setName] = useState(user.name);
+  const [email, setEmail] = useState(user.email);
+
   useEffect(() => {
     dispatch(getUserData({ token: user.token }));
-  });
+  }, []);
 
   const saveEditHandler = () => {
-    alert('Saved');
+    dispatch(updateUserData({ name: name, email: email, token: user.token }));
+    getUserData({ token: user.token });
     setIsEdit(false);
   };
 
   const cancelEditHandler = () => {
-    alert('Canceled');
+    setName(user.name);
+    setEmail(user.email);
     setIsEdit(false);
   };
 
   const editHandler = () => {
-    alert('Edit');
     setIsEdit(true);
   };
 
