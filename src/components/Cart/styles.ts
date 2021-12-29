@@ -1,11 +1,10 @@
 import styled from 'styled-components/native';
 
-export const Background = styled.TouchableOpacity`
-  background: rgba(0, 0, 0, 0.5);
-  flex: 1;
-  align-items: center;
-  justify-content: center;
-`;
+// export const Background = styled.View`
+//   flex: 1;
+//   align-items: center;
+//   justify-content: center;
+// `;
 
 export const Container = styled.View`
   background: ${({ theme }) => theme.colors.background_secondary};
@@ -16,7 +15,7 @@ export const Container = styled.View`
   justify-content: space-between;
 `;
 
-export const Content = styled.TouchableOpacity`
+export const Content = styled.View`
   padding: 8% 8% 2% 5%;
   justify-content: space-between;
 `;
