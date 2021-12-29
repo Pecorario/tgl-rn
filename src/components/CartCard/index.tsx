@@ -1,5 +1,5 @@
 import React from 'react';
-import { TrashButton } from '@components/index';
+import { TrashButton } from '@components/TrashButton';
 
 import { ListGameProps } from '@models/UIProps';
 import {

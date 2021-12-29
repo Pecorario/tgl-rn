@@ -102,6 +102,7 @@ export function Registration({ navigation }: RouteProps) {
         value={email}
         keyboardType="email-address"
         message={messageEmail}
+        autoCapitalize="none"
       />
       <Input
         placeholder="Password"
@@ -109,6 +110,7 @@ export function Registration({ navigation }: RouteProps) {
         value={password}
         secureTextEntry={true}
         message={messagePassword}
+        autoCapitalize="none"
       />
     </AuthScreens>
   );

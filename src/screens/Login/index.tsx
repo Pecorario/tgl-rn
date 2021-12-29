@@ -68,12 +68,14 @@ export function Login({ navigation }: RouteProps) {
         onChangeText={emailChangeHandler}
         value={email}
         keyboardType="email-address"
+        autoCapitalize="none"
       />
       <Input
         placeholder="Password"
         onChangeText={passwordChangeHandler}
         value={password}
         secureTextEntry={true}
+        autoCapitalize="none"
       />
       <TouchableOpacity
         activeOpacity={0.6}

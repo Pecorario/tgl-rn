@@ -77,7 +77,6 @@ export function ForgotPassword({ navigation }: RouteProps) {
           onChangeText={setPassword}
           value={password}
           secureTextEntry={true}
-          message=""
         />
       )}
     </AuthScreens>

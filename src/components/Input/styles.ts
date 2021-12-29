@@ -13,7 +13,9 @@ export const InputContent = styled.TextInput`
 `;
 
 export const Warning = styled.Text`
-  bottom: 0;
+  position: absolute;
+  bottom: 5px;
+  left: 5%;
   color: red;
   font-size: 12px;
 `;

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Modal } from 'react-native';
-import { AuthButton, CartCard } from '@components/index';
+import { AuthButton } from '@components/AuthButton';
+import { CartCard } from '@components/CartCard';
 
 import { CartProps } from '@models/UIProps';
 import {

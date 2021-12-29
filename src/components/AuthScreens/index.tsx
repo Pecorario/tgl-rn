@@ -1,7 +1,7 @@
 import React from 'react';
 import { Keyboard, SafeAreaView, TouchableWithoutFeedback } from 'react-native';
 
-import { AuthButton } from '@components/index';
+import { AuthButton } from '@components/AuthButton';
 
 import { AuthScreensProps } from '@models/UIProps';
 import {

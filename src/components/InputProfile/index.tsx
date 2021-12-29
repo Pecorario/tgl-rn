@@ -10,7 +10,8 @@ export function InputProfile({
   editable,
   onChangeText,
   keyboardType,
-  secureTextEntry
+  secureTextEntry,
+  ...rest
 }: InputProps) {
   const theme = useTheme();
 
@@ -20,6 +21,7 @@ export function InputProfile({
         <Label editable={editable}>{placeholder}</Label>
       </LabelContainer>
       <InputContent
+        {...rest}
         value={value}
         onChangeText={onChangeText}
         editable={editable}

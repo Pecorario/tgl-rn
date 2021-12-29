@@ -54,6 +54,7 @@ export function Profile() {
                 value={email}
                 onChangeText={setEmail}
                 editable={true}
+                autoCapitalize="none"
               />
               {/* <InputProfile
                 placeholder="Password"

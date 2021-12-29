@@ -10,20 +10,21 @@ export function Input({
   onChangeText,
   keyboardType,
   secureTextEntry,
-  message
+  message,
+  ...rest
 }: InputProps) {
   const theme = useTheme();
 
   return (
     <Container>
       <InputContent
+        {...rest}
         value={value}
         placeholder={placeholder}
         onChangeText={onChangeText}
         placeholderTextColor={theme.colors.text_label}
         keyboardType={keyboardType}
         secureTextEntry={secureTextEntry}
-        autoCapitalize="none"
       />
       {message !== '' && <Warning>{message}</Warning>}
     </Container>

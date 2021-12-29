@@ -3,7 +3,7 @@ import { TouchableOpacity } from 'react-native';
 import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
 import { useTheme } from 'styled-components';
 import { FontAwesome5 } from '@expo/vector-icons';
-import { Cart } from '@components/index';
+import { Cart } from '@components/Cart';
 
 import { gameActions } from '@store/game-slice';
 import { ButtonProps } from '@models/ButtonProps';
