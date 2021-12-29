@@ -178,9 +178,9 @@ const gameSlice = createSlice({
           return;
         }
 
-        const day = new Date().toLocaleString('pt-BR', { day: '2-digit' });
-        const month = new Date().toLocaleString('pt-BR', { month: '2-digit' });
-        const year = new Date().getFullYear();
+        // const day = new Date().toLocaleString('pt-BR', { day: '2-digit' });
+        // const month = new Date().toLocaleString('pt-BR', { month: '2-digit' });
+        // const year = new Date().getFullYear();
 
         const game = {
           id: state.counter,
@@ -188,8 +188,7 @@ const gameSlice = createSlice({
           name: state.typeActive.name,
           color: state.typeActive.color,
           price: state.typeActive.price,
-          numbers: state.selectedNumbers,
-          date: `${day}/${month}/${year}`
+          numbers: state.selectedNumbers
         };
 
         state.totalPrice = state.totalPrice + state.typeActive.price;
@@ -205,6 +204,10 @@ const gameSlice = createSlice({
         state.games = state.games.filter((game: BetProps) => game.id !== id);
         state.totalPrice = state.totalPrice - existingItem.price;
       }
+    },
+    cleanCart(state) {
+      state.games = [];
+      state.totalPrice = 0;
     }
   }
 });

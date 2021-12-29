@@ -28,8 +28,6 @@ export function Registration({ navigation }: RouteProps) {
     let regex_validation =
       /^([a-z]){1,}([a-z0-9._-]){1,}([@]){1}([a-z]){2,}([.]){1}([a-z]){2,}([.]?){1}([a-z]?){2,}$/i;
 
-    console.log('É válido? ', regex_validation.test(email));
-
     if (email.trim().length > 0 && regex_validation.test(email)) {
       setMessageEmail('');
       setEmailIsValid(true);

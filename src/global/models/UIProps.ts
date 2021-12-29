@@ -14,6 +14,7 @@ export interface BetProps {
   title: string;
   numbers: number[];
   color: string;
+  id?: number;
 }
 
 export interface CartProps {

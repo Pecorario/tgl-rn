@@ -3,13 +3,7 @@ import { AuthButtonProps } from '@models/ButtonProps';
 
 export const Container = styled.View<AuthButtonProps>`
   align-items: center;
-  margin: ${props =>
-      props.type === 'primary'
-        ? '8%'
-        : props.type === 'quaternary'
-        ? '2%'
-        : '4%'}
-    0;
+  margin: ${props => (props.type === 'primary' ? '8%' : '4%')} 0;
 `;
 
 export const TextView = styled.View`
@@ -23,8 +17,6 @@ export const Text = styled.Text<AuthButtonProps>`
   color: ${props =>
     props.type === 'primary'
       ? props.theme.colors.primary
-      : props.type === 'quaternary'
-      ? props.theme.colors.btn_primary
       : props.theme.colors.text_title};
   margin-right: ${props => (props.type !== 'tertiary' ? '2%' : '0')};
   margin-left: ${props => (props.type === 'tertiary' ? '3%' : '0')};

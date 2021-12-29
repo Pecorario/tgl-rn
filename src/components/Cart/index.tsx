@@ -1,69 +1,41 @@
 import React from 'react';
 import Modal from 'react-native-modal';
+import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
 import { AuthButton } from '@components/AuthButton';
 import { CartBet } from '@components/CartBet';
 
 import { CartProps } from '@models/UIProps';
 import {
   Container,
-  Background,
   Title,
   Content,
   List,
   TitleLight,
   TotalPrice,
-  SaveContainer
+  SaveContainer,
+  EmptyCart,
+  SaveText
 } from './styles';
+import { getMoneyInReal } from '@helpers/utils';
+import { Ionicons } from '@expo/vector-icons';
+import { useTheme } from 'styled-components';
 
-const DATA = [
-  {
-    id: Math.random().toString(),
-    date: '30/11/2021',
-    price: 'R$2,50',
-    title: 'Megasena',
-    numbers: '01, 02, 03, 04, 05, 06, 07, 08, 09, 10, 11, 12, 13, 14, 15, 16',
-    color: '#35A45E'
-  },
-  {
-    id: Math.random().toString(),
-    date: '30/11/2021',
-    price: 'R$2,50',
-    title: 'Lotofácil',
-    numbers: '01, 02, 03, 04, 05, 06, 07, 08, 09, 10, 11, 12, 13, 14, 15, 16',
-    color: '#35A45E'
-  },
-  {
-    id: Math.random().toString(),
-    date: '30/11/2021',
-    price: 'R$2,50',
-    title: 'Lotofácil',
-    numbers: '01, 02, 03, 04, 05, 06, 07, 08, 09, 10, 11, 12, 13, 14, 15, 16',
-    color: '#35A45E'
-  },
-  {
-    id: Math.random().toString(),
-    date: '30/11/2021',
-    price: 'R$2,50',
-    title: 'Lotofácil',
-    numbers: '01, 02, 03, 04, 05, 06, 07, 08, 09, 10, 11, 12, 13, 14, 15, 16',
-    color: '#35A45E'
-  },
-  {
-    id: Math.random().toString(),
-    date: '30/11/2021',
-    price: 'R$2,50',
-    title: 'Lotofácil',
-    numbers: '01, 02, 03, 04, 05, 06, 07, 08, 09, 10, 11, 12, 13, 14, 15, 16',
-    color: '#35A45E'
-  }
-];
+export function Cart({ visible = false, onClose, onSave }: CartProps) {
+  const theme = useTheme();
+  const dispatch = useDispatch();
+  const games = useSelector((state: RootStateOrAny) => state.game.games);
+  const totalPrice = useSelector(
+    (state: RootStateOrAny) => state.game.totalPrice
+  );
+  const formatPrice = getMoneyInReal(totalPrice);
+  const differentColor = theme.colors.btn_primary;
 
-export function Cart({ visible = false, onOpen, onClose, onSave }: CartProps) {
   const renderItem = ({ item }: any) => (
     <CartBet
+      id={item.id}
       numbers={item.numbers}
       price={item.price}
-      title={item.title}
+      title={item.name}
       color={item.color}
     />
   );
@@ -73,25 +45,28 @@ export function Cart({ visible = false, onOpen, onClose, onSave }: CartProps) {
       onBackdropPress={onClose}
       style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}
     >
-      {/* <Background> */}
       <Container>
         <Content>
           <Title>CART</Title>
-          <List
-            data={DATA}
-            renderItem={renderItem}
-            keyExtractor={(item: any) => item.id}
-          />
+          {games.length === 0 ? (
+            <EmptyCart>Carrinho vazio!</EmptyCart>
+          ) : (
+            <List
+              data={games}
+              renderItem={renderItem}
+              keyExtractor={(item: any) => item.id}
+            />
+          )}
           <TotalPrice>
             <Title>CART </Title>
-            <TitleLight>TOTAL: R$7,00</TitleLight>
+            <TitleLight>TOTAL: {formatPrice}</TitleLight>
           </TotalPrice>
         </Content>
-        <SaveContainer>
-          <AuthButton type="quaternary" title="Save" onPress={onSave} />
+        <SaveContainer onPress={onSave}>
+          <SaveText>Save</SaveText>
+          <Ionicons name="arrow-forward" size={24} color={differentColor} />
         </SaveContainer>
       </Container>
-      {/* </Background> */}
     </Modal>
   );
 }

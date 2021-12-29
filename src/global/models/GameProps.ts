@@ -16,7 +16,7 @@ export interface BetProps {
   price: number;
   color: string;
   numbers: number[];
-  date: string;
+  date?: string;
 }
 export interface GameProps {
   cartIsOpen: boolean;
