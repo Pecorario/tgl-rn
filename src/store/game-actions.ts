@@ -2,7 +2,7 @@ import { Dispatch } from 'redux';
 import { gameActions } from './game-slice';
 import { TypeProps } from '@models/GameProps';
 
-export const fetchGamesData = () => {
+export const fetchTypesData = () => {
   return async (dispatch: Dispatch) => {
     const fetchData = async () => {
       const response = await fetch('http://192.168.0.106:3333/cart_games');
@@ -28,7 +28,7 @@ export const fetchGamesData = () => {
           description: item.description,
           range: item.range,
           price: item.price,
-          maxNumber: item['max-number'],
+          maxNumber: item.max_number,
           color: item.color,
           selected: false
         });

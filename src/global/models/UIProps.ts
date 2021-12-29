@@ -8,7 +8,7 @@ export interface AuthScreensProps {
   message?: string;
 }
 
-export interface ListGameProps {
+export interface BetProps {
   date?: string;
   price: number;
   title: string;

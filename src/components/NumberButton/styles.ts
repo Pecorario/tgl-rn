@@ -1,7 +1,13 @@
 import styled from 'styled-components/native';
 
-export const Container = styled.View`
-  background: ${({ theme }) => theme.colors.tertiary};
+interface ColorProps {
+  color?: string;
+  selected?: boolean;
+}
+
+export const Container = styled.View<ColorProps>`
+  background: ${props =>
+    props.selected ? props.color : props.theme.colors.tertiary};
   width: 45px;
   height: 45px;
   border-radius: 22.5px;

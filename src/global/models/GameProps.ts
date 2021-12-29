@@ -11,6 +11,7 @@ export interface TypeProps {
 
 export interface BetProps {
   id: number;
+  idType?: number;
   name: string;
   price: number;
   color: string;
@@ -20,8 +21,12 @@ export interface BetProps {
 export interface GameProps {
   cartIsOpen: boolean;
   types: Array<TypeProps>;
+  filters: Array<TypeProps>;
   typeActive: TypeProps | null;
+  filterActive: TypeProps | null;
   minCartValue: number;
-  bets: Array<BetProps>;
+  games: Array<BetProps>;
   selectedNumbers: Array<number>;
+  totalPrice: number;
+  counter: number;
 }

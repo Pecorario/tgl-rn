@@ -1,16 +1,23 @@
 import React, { useEffect } from 'react';
-import { GameButton, ListGame } from '@components/index';
+import { TypeButton, Bet } from '@components/index';
 
 import { Container, Title, List, Text, FiltersContainer } from './styles';
-import { fetchGamesData } from '@store/game-actions';
+import { fetchTypesData } from '@store/game-actions';
 import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
+import { gameActions } from '@store/game-slice';
+import { TypeProps } from '@models/GameProps';
 
 export function Home() {
   const dispatch = useDispatch();
-  const types = useSelector((state: RootStateOrAny) => state.game.types);
+  const filters = useSelector((state: RootStateOrAny) => state.game.filters);
+
+  useEffect(() => {
+    dispatch(fetchTypesData());
+    dispatch(gameActions.resetFilters());
+  }, []);
 
   // const renderItem = ({ item }: any) => (
-  //   <ListGame
+  //   <Bet
   //     numbers={item.numbers}
   //     date={item.date}
   //     price={item.price}
@@ -19,8 +26,8 @@ export function Home() {
   //   />
   // );
 
-  const renderGame = ({ item }: any) => (
-    <GameButton
+  const renderFilter = ({ item }: any) => (
+    <TypeButton
       active={item.selected}
       title={item.name}
       color={item.color}
@@ -28,42 +35,31 @@ export function Home() {
     />
   );
 
-  useEffect(() => {
-    dispatch(fetchGamesData());
-  }, []);
-
   return (
     <Container>
       <Title>RECENT GAMES</Title>
       <Text>Filters</Text>
       <FiltersContainer
-        data={types}
-        renderItem={renderGame}
-        keyExtractor={(item: any) => item.id}
-        contentContainerStyle={{
-          flexDirection: 'row',
-          justifyContent: 'space-around'
-        }}
-      />
-      {/* <GameButton
-          active={false}
-          title="Lotofácil"
-          color="#7F3992"
-          onPress={() => {}}
-        />
-        <GameButton
-          active={false}
-          title="Mega-Sena"
-          color="#01AC66"
-          onPress={() => {}}
-        />
-        <GameButton
-          active={false}
-          title="Quina"
-          color="#F79C31"
-          onPress={() => {}}
-        />
-      </FiltersContainer> */}
+      // data={filters}
+      // renderItem={renderFilter}
+      // keyExtractor={(item: any) => item.id}
+      // contentContainerStyle={{
+      //   flexDirection: 'row',
+      //   justifyContent: 'space-around'
+      // }}
+      >
+        {filters.map((type: TypeProps) => {
+          return (
+            <TypeButton
+              key={type.id}
+              active={type.selected}
+              title={type.name}
+              color={type.color}
+              onPress={() => console.log(type.name)}
+            />
+          );
+        })}
+      </FiltersContainer>
       {/* <List
         data={DATA}
         renderItem={renderItem}

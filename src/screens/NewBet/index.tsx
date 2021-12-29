@@ -1,15 +1,14 @@
-import React from 'react';
-import { FlatList } from 'react-native';
+import React, { useEffect } from 'react';
 import { useTheme } from 'styled-components';
 
-import { GameButton, Button, NumberButton } from '@components/index';
+import { TypeButton, Button, NumberButton } from '@components/index';
 
 import {
   Container,
   TitleContainer,
   TitleStrong,
   TitleLight,
-  FiltersContainer,
+  TypesContainer,
   TitleGame,
   TextGame,
   ButtonsContainer,
@@ -18,6 +17,7 @@ import {
 } from './styles';
 import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
 import { gameActions } from '@store/game-slice';
+import { TypeProps } from '@models/GameProps';
 
 export function NewBet() {
   const theme = useTheme();
@@ -34,14 +34,32 @@ export function NewBet() {
     numbers.push(i);
   }
 
-  const renderItem = ({ item }: any) => <NumberButton number={item} />;
+  useEffect(() => {
+    dispatch(gameActions.resetTypeDefault());
+  }, []);
 
   const selectType = (name: string) => {
     dispatch(gameActions.selectType(name));
   };
 
+  const clearGame = () => {
+    dispatch(gameActions.clearGame());
+  };
+
+  const completeGame = () => {
+    dispatch(gameActions.completeGame());
+  };
+
+  const addGameToCart = () => {
+    dispatch(gameActions.addGameToCart());
+  };
+
+  const renderNumberButton = ({ item }: any) => (
+    <NumberButton number={item} color={typeActive.color} />
+  );
+
   const renderGame = ({ item }: any) => (
-    <GameButton
+    <TypeButton
       active={item.selected}
       title={item.name}
       color={item.color}
@@ -57,15 +75,19 @@ export function NewBet() {
       </TitleContainer>
 
       <TitleGame>Choose a game</TitleGame>
-      <FiltersContainer
-        data={types}
-        renderItem={renderGame}
-        keyExtractor={(item: any) => item.id}
-        contentContainerStyle={{
-          flexDirection: 'row',
-          justifyContent: 'space-around'
-        }}
-      />
+      <TypesContainer>
+        {types.map((type: TypeProps) => {
+          return (
+            <TypeButton
+              key={type.id}
+              active={type.selected}
+              title={type.name}
+              color={type.color}
+              onPress={() => selectType(type.name)}
+            />
+          );
+        })}
+      </TypesContainer>
 
       {typeActive !== null && (
         <>
@@ -78,16 +100,19 @@ export function NewBet() {
                 type="default"
                 title="Complete"
                 color={theme.colors.btn_primary}
+                onPress={completeGame}
               />
               <Button
                 type="default"
                 title="Clear"
                 color={theme.colors.btn_primary}
+                onPress={clearGame}
               />
               <Button
                 type="cart"
                 title="Add"
                 color={theme.colors.btn_primary}
+                onPress={addGameToCart}
               />
             </ButtonsContainer>
           </DetailsContainer>
@@ -97,7 +122,7 @@ export function NewBet() {
               alignItems: 'center'
             }}
             data={numbers}
-            renderItem={renderItem}
+            renderItem={renderNumberButton}
             keyExtractor={(item: any) => item}
             numColumns={6}
           />

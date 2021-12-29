@@ -32,11 +32,10 @@ export const TitleGame = styled.Text`
   font-size: 16px;
 `;
 
-export const FiltersContainer = styled.FlatList`
-  /* flex-direction: row;
+export const TypesContainer = styled.View`
+  flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-around; */
-  height: 10%;
+  justify-content: space-around;
 `;
 
 export const DetailsContainer = styled.View`
@@ -58,4 +57,5 @@ export const ButtonsContainer = styled.View`
 
 export const List = styled.FlatList`
   margin-bottom: 8%;
+  flex: 1;
 `;

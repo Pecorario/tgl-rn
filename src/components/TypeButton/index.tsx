@@ -4,7 +4,7 @@ import { TouchableOpacity } from 'react-native';
 import { ButtonProps } from '@models/ButtonProps';
 import { Container, Text } from './styles';
 
-export function GameButton({
+export function TypeButton({
   title,
   color,
   onPress,

@@ -21,11 +21,6 @@ export const sendLogin = ({ email, password }: UserProps) => {
       const data = await response.json();
 
       if (!response.ok) {
-        Toast.show({
-          type: 'error',
-          text1: 'A requisição falhou.'
-        });
-
         throw new Error('Login failed!');
       }
 
@@ -72,11 +67,6 @@ export const getUserData = ({ token }: UserProps) => {
       const data = await response.json();
 
       if (!response.ok) {
-        Toast.show({
-          type: 'error',
-          text1: 'A requisição falhou.'
-        });
-
         throw new Error('GetUserData failed!');
       }
 
@@ -122,11 +112,6 @@ export const updateUserData = ({ name, email, token }: UserProps) => {
       const data = await response.json();
 
       if (!response.ok) {
-        Toast.show({
-          type: 'error',
-          text1: 'A requisição falhou.'
-        });
-
         throw new Error('Update User failed!');
       }
 
@@ -175,10 +160,6 @@ export const getToken = ({ email }: UserProps) => {
       const data = await response.json();
 
       if (!response.ok) {
-        Toast.show({
-          type: 'error',
-          text1: 'A requisição falhou.'
-        });
         throw new Error('Get token failed!');
       }
 
@@ -219,11 +200,6 @@ export const updatePassword = ({ token, password }: UserProps) => {
       // const data = await response.json();
 
       if (!response.ok) {
-        Toast.show({
-          type: 'error',
-          text1: 'A requisição falhou.'
-        });
-
         throw new Error('Update User failed!');
       }
 
@@ -268,11 +244,6 @@ export const createUser = ({ email, password, name }: UserProps) => {
       const data = await response.json();
 
       if (!response.ok) {
-        Toast.show({
-          type: 'error',
-          text1: 'A requisição falhou.'
-        });
-
         throw new Error('Login failed!');
       }
 

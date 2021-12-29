@@ -45,6 +45,21 @@ const toastConfig = {
         color: 'white'
       }}
     />
+  ),
+  warn: (props: any) => (
+    <BaseToast
+      {...props}
+      style={{ borderLeftColor: '#FFD700', backgroundColor: '#FFD700' }}
+      contentContainerStyle={{ paddingHorizontal: 15 }}
+      text1Style={{
+        fontSize: 15,
+        fontWeight: '400',
+        color: 'white'
+      }}
+      text2Style={{
+        color: 'white'
+      }}
+    />
   )
 };
 

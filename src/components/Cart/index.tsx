@@ -1,7 +1,7 @@
 import React from 'react';
 import { Modal } from 'react-native';
 import { AuthButton } from '@components/AuthButton';
-import { CartCard } from '@components/CartCard';
+import { CartBet } from '@components/CartBet';
 
 import { CartProps } from '@models/UIProps';
 import {
@@ -60,7 +60,7 @@ const DATA = [
 
 export function Cart({ visible = false, onOpen, onClose, onSave }: CartProps) {
   const renderItem = ({ item }: any) => (
-    <CartCard
+    <CartBet
       numbers={item.numbers}
       price={item.price}
       title={item.title}

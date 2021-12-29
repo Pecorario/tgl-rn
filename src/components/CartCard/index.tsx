@@ -1,7 +1,7 @@
 import React from 'react';
 import { TrashButton } from '@components/TrashButton';
 
-import { ListGameProps } from '@models/UIProps';
+import { BetProps } from '@models/UIProps';
 import {
   Container,
   Numbers,
@@ -12,7 +12,7 @@ import {
   TitleAndPrice
 } from './styles';
 
-export const CartCard = ({ price, title, numbers, color }: ListGameProps) => {
+export const CartBet = ({ price, title, numbers, color }: BetProps) => {
   return (
     <Container>
       <TrashButton onPress={() => alert('Delete!')} />
