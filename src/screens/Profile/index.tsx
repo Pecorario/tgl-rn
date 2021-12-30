@@ -9,7 +9,6 @@ import { Container, Box, ContainerButtons } from './styles';
 
 export function Profile() {
   const [isEdit, setIsEdit] = useState(false);
-  // const [password, setPassword] = useState('12345678');
   const dispatch = useDispatch();
   const user = useSelector((state: RootStateOrAny) => state.auth.user);
   const theme = useTheme();
@@ -56,13 +55,6 @@ export function Profile() {
                 editable={true}
                 autoCapitalize="none"
               />
-              {/* <InputProfile
-                placeholder="Password"
-                value={password}
-                onChangeText={setPassword}
-                secureTextEntry={true}
-                editable={true}
-              /> */}
             </Box>
             <ContainerButtons>
               <Button
@@ -92,12 +84,6 @@ export function Profile() {
                 value={user?.email}
                 editable={false}
               />
-              {/* <InputProfile
-                placeholder="Password"
-                value={password}
-                editable={false}
-                secureTextEntry={true}
-              /> */}
             </Box>
             <ContainerButtons>
               <Button

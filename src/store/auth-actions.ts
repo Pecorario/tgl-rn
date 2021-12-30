@@ -46,6 +46,7 @@ export const sendLogin = ({ email, password }: UserProps) => {
     } catch (error) {
       const message = 'Email e/ou senha inválidos';
       dispatch(authActions.addMessage({ message }));
+      dispatch(authActions.setNotLoading());
       console.log(error);
     }
   };
@@ -93,6 +94,7 @@ export const getUserData = ({ token }: UserProps) => {
         text1: 'Algo inesperado aconteceu.',
         text2: 'Tente novamente mais tarde.'
       });
+      dispatch(authActions.setNotLoading());
       console.log(error);
     }
   };
@@ -127,8 +129,8 @@ export const updateUserData = ({ name, email, token }: UserProps) => {
 
     try {
       const { email, name } = await sendRequest();
-      dispatch(authActions.setNotLoading());
 
+      dispatch(authActions.setNotLoading());
       dispatch(
         authActions.updateAccount({
           name: name,
@@ -146,6 +148,7 @@ export const updateUserData = ({ name, email, token }: UserProps) => {
         text1: 'Algo inesperado aconteceu.',
         text2: 'Tente novamente mais tarde.'
       });
+      dispatch(authActions.setNotLoading());
       console.log(error);
     }
   };
@@ -210,13 +213,9 @@ export const updatePassword = ({ token, password }: UserProps) => {
         }
       });
 
-      // const data = await response.json();
-
       if (!response.ok) {
         throw new Error('Update User failed!');
       }
-
-      // return data;
     };
 
     try {
@@ -234,6 +233,7 @@ export const updatePassword = ({ token, password }: UserProps) => {
         text1: 'Algo inesperado aconteceu.',
         text2: 'Tente novamente mais tarde.'
       });
+      dispatch(authActions.setNotLoading());
       console.log(error);
     }
   };
@@ -279,6 +279,7 @@ export const createUser = ({ email, password, name }: UserProps) => {
         text1: 'Algo inesperado aconteceu.',
         text2: 'Tente novamente mais tarde.'
       });
+      dispatch(authActions.setNotLoading());
       console.log(error);
     }
   };

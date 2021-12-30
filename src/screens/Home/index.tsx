@@ -1,7 +1,14 @@
 import React, { useEffect } from 'react';
 import { TypeButton, Bet } from '@components/index';
 
-import { Container, Title, List, Text, FiltersContainer } from './styles';
+import {
+  Container,
+  Title,
+  List,
+  Text,
+  FiltersContainer,
+  EmptyGames
+} from './styles';
 import { fetchTypesData, listGames } from '@store/game-actions';
 import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
 import { gameActions } from '@store/game-slice';
@@ -17,6 +24,9 @@ export function Home() {
   const filteredGames = useSelector(
     (state: RootStateOrAny) => state.game.filteredGames
   );
+  const typesLoaded = useSelector(
+    (state: RootStateOrAny) => state.game.typesLoaded
+  );
   const { token } = useSelector((state: RootStateOrAny) => state.auth.user);
 
   useEffect(() => {
@@ -27,9 +37,10 @@ export function Home() {
   useEffect(() => {
     {
       filtersActive !== undefined &&
+        typesLoaded &&
         dispatch(listGames({ types: filtersActive, token, typesGame }));
     }
-  }, [filtersActive]);
+  }, [filtersActive, typesGame, token, typesLoaded]);
 
   const selectFilter = (name: string) => {
     dispatch(gameActions.selectFilter({ name }));
@@ -48,15 +59,7 @@ export function Home() {
     <Container>
       <Title>RECENT GAMES</Title>
       <Text>Filters</Text>
-      <FiltersContainer
-      // data={filters}
-      // renderItem={renderFilter}
-      // keyExtractor={(item: any) => item.id}
-      // contentContainerStyle={{
-      //   flexDirection: 'row',
-      //   justifyContent: 'space-around'
-      // }}
-      >
+      <FiltersContainer>
         {filters.map((type: TypeProps) => {
           return (
             <TypeButton
@@ -69,11 +72,15 @@ export function Home() {
           );
         })}
       </FiltersContainer>
-      <List
-        data={filteredGames}
-        renderItem={renderItem}
-        keyExtractor={(item: any) => item.id}
-      />
+      {filteredGames.length === 0 ? (
+        <EmptyGames>Nenhum jogo encontrado.</EmptyGames>
+      ) : (
+        <List
+          data={filteredGames}
+          renderItem={renderItem}
+          keyExtractor={(item: any) => item.id}
+        />
+      )}
     </Container>
   );
 }

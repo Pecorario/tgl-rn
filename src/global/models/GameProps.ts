@@ -30,4 +30,5 @@ export interface GameProps {
   selectedNumbers: Array<number>;
   totalPrice: number;
   counter: number;
+  typesLoaded: boolean;
 }

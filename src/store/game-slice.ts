@@ -13,7 +13,8 @@ const initialState: GameProps = {
   games: [],
   selectedNumbers: [],
   totalPrice: 0,
-  counter: 0
+  counter: 0,
+  typesLoaded: false
 };
 
 const gameSlice = createSlice({
@@ -36,10 +37,6 @@ const gameSlice = createSlice({
       state.selectedNumbers = [];
       state.types.map((game: TypeProps) => {
         if (game.name === selectedGame) {
-          if (game.selected === true) {
-            state.typeActive = null;
-            return (game.selected = false);
-          }
           state.typeActive = {
             id: game.id,
             name: game.name,
@@ -201,10 +198,6 @@ const gameSlice = createSlice({
           return;
         }
 
-        // const day = new Date().toLocaleString('pt-BR', { day: '2-digit' });
-        // const month = new Date().toLocaleString('pt-BR', { month: '2-digit' });
-        // const year = new Date().getFullYear();
-
         const game = {
           id: state.counter,
           idType: state.typeActive.id,
@@ -234,6 +227,12 @@ const gameSlice = createSlice({
     },
     addFilteredGames(state, action) {
       state.filteredGames = action.payload.filteredGames;
+    },
+    setTypesLoaded(state) {
+      state.typesLoaded = true;
+    },
+    setTypesNotLoaded(state) {
+      state.typesLoaded = false;
     }
   }
 });
