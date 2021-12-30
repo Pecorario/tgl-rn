@@ -43,13 +43,14 @@ export function Profile() {
           <>
             <Box>
               <InputProfile
-                placeholder="Name"
+                label="Name"
                 value={name}
                 onChangeText={setName}
                 editable={true}
+                autoCapitalize="words"
               />
               <InputProfile
-                placeholder="Email"
+                label="Email"
                 value={email}
                 onChangeText={setEmail}
                 editable={true}
@@ -74,13 +75,9 @@ export function Profile() {
         ) : (
           <>
             <Box>
+              <InputProfile label="Name" value={user?.name} editable={false} />
               <InputProfile
-                placeholder="Name"
-                value={user?.name}
-                editable={false}
-              />
-              <InputProfile
-                placeholder="Email"
+                label="Email"
                 value={user?.email}
                 editable={false}
               />

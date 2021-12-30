@@ -1,3 +1,5 @@
+import { TypeProps } from '@models/GameProps';
+
 export interface UserProps {
   name?: string;
   email?: string;
@@ -16,4 +18,11 @@ export interface AuthProps {
   tokenPassword: string;
   message: string;
   loading: boolean;
+  saved: boolean;
+}
+
+export interface UpdateTypeProps {
+  data?: any;
+  id?: number;
+  token: string;
 }

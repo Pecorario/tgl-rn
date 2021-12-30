@@ -10,7 +10,9 @@ export const Container = styled.View<InputProps>`
   border-width: 2px;
   border-radius: 10px;
   position: relative;
-  margin-bottom: 8%;
+  margin: 2%;
+  margin-bottom: 5%;
+  flex: ${props => (props.isFlexRow ? 1 : 'none')};
 `;
 
 export const InputContent = styled.TextInput<InputProps>`

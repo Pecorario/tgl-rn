@@ -5,7 +5,6 @@ export const Container = styled.View<DefaultButton>`
   border-radius: 10px;
   border-width: 2px;
   border-color: ${props => props.color};
-  padding: 1% 0;
   justify-content: center;
   align-items: center;
   padding: 2%;

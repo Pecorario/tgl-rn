@@ -6,19 +6,20 @@ import { Container, InputContent, Label, LabelContainer } from './styles';
 
 export function InputProfile({
   value,
-  placeholder,
+  label,
   editable,
   onChangeText,
   keyboardType,
+  isFlexRow,
   secureTextEntry,
   ...rest
 }: InputProps) {
   const theme = useTheme();
 
   return (
-    <Container editable={editable}>
+    <Container editable={editable} isFlexRow={isFlexRow}>
       <LabelContainer>
-        <Label editable={editable}>{placeholder}</Label>
+        <Label editable={editable}>{label}</Label>
       </LabelContainer>
       <InputContent
         {...rest}

@@ -1,6 +1,6 @@
 import { Dispatch } from 'redux';
 import { authActions } from './auth-slice';
-import { UserProps } from '@models/AuthProps';
+import { UpdateTypeProps, UserProps } from '@models/AuthProps';
 import Toast from 'react-native-toast-message';
 
 export const sendLogin = ({ email, password }: UserProps) => {
@@ -280,6 +280,171 @@ export const createUser = ({ email, password, name }: UserProps) => {
         text2: 'Tente novamente mais tarde.'
       });
       dispatch(authActions.setNotLoading());
+      console.log(error);
+    }
+  };
+};
+
+export const updateType = ({ data, token }: UpdateTypeProps) => {
+  const { id, name, description, range, price, maxNumber, color } = data;
+  return async (dispatch: Dispatch) => {
+    dispatch(authActions.setLoading());
+    dispatch(authActions.defaultChanges());
+
+    const sendRequest = async () => {
+      const response = await fetch(
+        `http://192.168.0.106:3333/admin/update-game/${id}`,
+        {
+          method: 'PUT',
+          body: JSON.stringify({
+            type: name,
+            description: description,
+            range: +range,
+            price: +price,
+            max_number: +maxNumber,
+            color: color
+          }),
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+            Authorization: `Bearer ${token}`
+          }
+        }
+      );
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error('Update Type failed!');
+      }
+
+      return data;
+    };
+
+    try {
+      await sendRequest();
+      dispatch(authActions.saveChanges());
+      dispatch(authActions.setNotLoading());
+
+      Toast.show({
+        type: 'success',
+        text1: 'Alteração feita com sucesso!'
+      });
+    } catch (error) {
+      Toast.show({
+        type: 'error',
+        text1: 'Algo inesperado aconteceu.',
+        text2: 'Tente novamente mais tarde.'
+      });
+      dispatch(authActions.setNotLoading());
+      dispatch(authActions.defaultChanges());
+      console.log(error);
+    }
+  };
+};
+
+export const createType = ({ data, token }: UpdateTypeProps) => {
+  const { name, description, range, price, maxNumber, color } = data;
+  console.log('Nem aqui?');
+  return async (dispatch: Dispatch) => {
+    dispatch(authActions.setLoading());
+    dispatch(authActions.defaultChanges());
+
+    const sendRequest = async () => {
+      const response = await fetch(
+        `http://192.168.0.106:3333/admin/create-game`,
+        {
+          method: 'POST',
+          body: JSON.stringify({
+            type: name,
+            description: description,
+            range: +range,
+            price: +price,
+            max_number: +maxNumber,
+            color: color
+          }),
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+            Authorization: `Bearer ${token}`
+          }
+        }
+      );
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error('Create Type failed!');
+      }
+
+      return data;
+    };
+
+    try {
+      await sendRequest();
+      console.log('Acho que foi');
+      dispatch(authActions.saveChanges());
+      dispatch(authActions.setNotLoading());
+
+      Toast.show({
+        type: 'success',
+        text1: 'Alteração feita com sucesso!'
+      });
+    } catch (error) {
+      Toast.show({
+        type: 'error',
+        text1: 'Algo inesperado aconteceu.',
+        text2: 'Tente novamente mais tarde.'
+      });
+      dispatch(authActions.setNotLoading());
+      dispatch(authActions.defaultChanges());
+      console.log(error);
+    }
+  };
+};
+
+export const deleteType = ({ id, token }: UpdateTypeProps) => {
+  console.log('Chegou qual id:', id);
+  return async (dispatch: Dispatch) => {
+    dispatch(authActions.setLoading());
+    dispatch(authActions.defaultChanges());
+
+    const sendRequest = async () => {
+      const response = await fetch(
+        `http://192.168.0.106:3333/admin/delete-game/${id}`,
+        {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+            Authorization: `Bearer ${token}`
+          }
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error('Delete Type failed!');
+      }
+    };
+
+    try {
+      await sendRequest();
+      console.log('Foi mermao');
+      dispatch(authActions.saveChanges());
+      dispatch(authActions.setNotLoading());
+
+      Toast.show({
+        type: 'success',
+        text1: 'Jogo deletado com sucesso!'
+      });
+    } catch (error) {
+      Toast.show({
+        type: 'error',
+        text1: 'Algo inesperado aconteceu.',
+        text2: 'Tente novamente mais tarde.'
+      });
+      dispatch(authActions.setNotLoading());
+      dispatch(authActions.defaultChanges());
       console.log(error);
     }
   };

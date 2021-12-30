@@ -1,7 +1,6 @@
 import React from 'react';
 import Modal from 'react-native-modal';
 import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
-import { AuthButton } from '@components/AuthButton';
 import { CartBet } from '@components/CartBet';
 
 import { CartProps } from '@models/UIProps';
@@ -22,7 +21,6 @@ import { useTheme } from 'styled-components';
 
 export function Cart({ visible = false, onClose, onSave }: CartProps) {
   const theme = useTheme();
-  const dispatch = useDispatch();
   const games = useSelector((state: RootStateOrAny) => state.game.games);
   const totalPrice = useSelector(
     (state: RootStateOrAny) => state.game.totalPrice

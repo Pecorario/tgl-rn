@@ -147,12 +147,15 @@ export const listGames = ({ types, token, typesGame }: any) => {
       let loadedData: any = [];
 
       data.map((item: any) => {
+        const auxColor = typesGame.find(
+          (type: any) => type.id === item.type.id
+        );
         const game = {
           id: item.id,
           name: item.type.type,
           price: item.price,
           numbers: item.choosen_numbers,
-          color: typesGame[item.type.id - 1].color,
+          color: auxColor.color,
           date: item.created_at
         };
         loadedData.push(game);

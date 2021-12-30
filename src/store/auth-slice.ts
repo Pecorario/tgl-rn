@@ -5,7 +5,8 @@ const initialState: AuthProps = {
   user: null,
   tokenPassword: '',
   message: '',
-  loading: false
+  loading: false,
+  saved: false
 };
 
 const authSlice = createSlice({
@@ -54,6 +55,12 @@ const authSlice = createSlice({
     },
     setNotLoading(state) {
       state.loading = false;
+    },
+    saveChanges(state) {
+      state.saved = true;
+    },
+    defaultChanges(state) {
+      state.saved = false;
     }
   }
 });

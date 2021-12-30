@@ -23,6 +23,11 @@ export function Login({ navigation }: RouteProps) {
     dispatch(authActions.removeMessage());
   }, []);
 
+  const onLink = () => {
+    dispatch(authActions.removeMessage());
+    navigation.navigate('Forgot Password');
+  };
+
   const onSend = () => {
     if (email.trim() === '' || password.trim() === '') {
       dispatch(
@@ -48,11 +53,13 @@ export function Login({ navigation }: RouteProps) {
   };
 
   const toRegistration = () => {
+    dispatch(authActions.removeMessage());
     navigation.navigate('Registration');
   };
 
   useEffect(() => {
     if (user !== null) {
+      dispatch(authActions.removeMessage());
       navigation.navigate('Logged');
     }
   }, [user]);
@@ -82,12 +89,7 @@ export function Login({ navigation }: RouteProps) {
           secureTextEntry={true}
           autoCapitalize="none"
         />
-        <TouchableOpacity
-          activeOpacity={0.6}
-          onPress={() => {
-            navigation.navigate('Forgot Password');
-          }}
-        >
+        <TouchableOpacity activeOpacity={0.6} onPress={onLink}>
           <Link>
             <TextLink>I forgot my password</TextLink>
           </Link>

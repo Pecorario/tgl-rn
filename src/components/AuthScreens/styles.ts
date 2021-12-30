@@ -61,4 +61,5 @@ export const Footer = styled.View`
 export const FooterText = styled.Text`
   font-family: ${({ theme }) => theme.fonts.regular};
   color: ${({ theme }) => theme.colors.text_title};
+  font-size: 12px;
 `;

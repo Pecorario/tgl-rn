@@ -35,10 +35,12 @@ export function Home() {
   }, []);
 
   useEffect(() => {
-    {
+    if (
       filtersActive !== undefined &&
-        typesLoaded &&
-        dispatch(listGames({ types: filtersActive, token, typesGame }));
+      typesLoaded === true &&
+      typesGame !== undefined
+    ) {
+      dispatch(listGames({ types: filtersActive, token, typesGame }));
     }
   }, [filtersActive, typesGame, token, typesLoaded]);
 

@@ -1,12 +1,12 @@
 export interface TypeProps {
-  id: number;
+  id?: number;
   name: string;
   description: string;
   range: number;
   price: number;
   maxNumber: number;
   color: string;
-  selected: boolean;
+  selected?: boolean;
 }
 
 export interface BetProps {

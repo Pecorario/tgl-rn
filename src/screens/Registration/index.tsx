@@ -93,6 +93,7 @@ export function Registration({ navigation }: RouteProps) {
         value={name}
         keyboardType="default"
         message={messageName}
+        autoCapitalize="words"
       />
       <Input
         placeholder="Email"
