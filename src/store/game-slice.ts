@@ -7,7 +7,8 @@ const initialState: GameProps = {
   types: [],
   filters: [],
   typeActive: null,
-  filterActive: null,
+  filtersActive: [],
+  filteredGames: [],
   minCartValue: 0,
   games: [],
   selectedNumbers: [],
@@ -75,11 +76,33 @@ const gameSlice = createSlice({
         }
       });
     },
+    selectFilter(state, action) {
+      const selectedGame = action.payload.name;
+      state.filters.map((game: TypeProps) => {
+        if (game.name === selectedGame) {
+          if (game.selected === true) {
+            const existingItem = game.name;
+            if (existingItem) {
+              state.filtersActive = state.filtersActive.filter(
+                (name: string) =>
+                  name !== `type%5B%5D=${encodeURIComponent(existingItem)}`
+              );
+            }
+            return (game.selected = false);
+          } else {
+            state.filtersActive.push(
+              'type%5B%5D=' + encodeURIComponent(game.name)
+            );
+            return (game.selected = true);
+          }
+        }
+      });
+    },
     resetFilters(state) {
       state.filters.map((game: TypeProps) => {
+        state.filtersActive = [];
         return (game.selected = false);
       });
-      state.filterActive = null;
     },
     addNumber(state, action) {
       const newNumber = +action.payload;
@@ -208,6 +231,9 @@ const gameSlice = createSlice({
     cleanCart(state) {
       state.games = [];
       state.totalPrice = 0;
+    },
+    addFilteredGames(state, action) {
+      state.filteredGames = action.payload.filteredGames;
     }
   }
 });
