@@ -15,4 +15,5 @@ export interface AuthProps {
   } | null;
   tokenPassword: string;
   message: string;
+  loading: boolean;
 }

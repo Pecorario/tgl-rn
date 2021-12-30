@@ -68,6 +68,7 @@ export function ForgotPassword({ navigation }: RouteProps) {
           value={email}
           keyboardType="email-address"
           message={message}
+          autoCapitalize="none"
         />
       ) : (
         <Input
@@ -75,6 +76,7 @@ export function ForgotPassword({ navigation }: RouteProps) {
           onChangeText={setPassword}
           value={password}
           secureTextEntry={true}
+          autoCapitalize="none"
         />
       )}
     </AuthScreens>

@@ -4,7 +4,8 @@ import { AuthProps } from '@models/AuthProps';
 const initialState: AuthProps = {
   user: null,
   tokenPassword: '',
-  message: ''
+  message: '',
+  loading: false
 };
 
 const authSlice = createSlice({
@@ -47,6 +48,12 @@ const authSlice = createSlice({
     },
     removeMessage(state) {
       state.message = '';
+    },
+    setLoading(state) {
+      state.loading = true;
+    },
+    setNotLoading(state) {
+      state.loading = false;
     }
   }
 });

@@ -2,7 +2,7 @@ import { Dispatch } from 'redux';
 import { gameActions } from './game-slice';
 import { BetProps, TypeProps } from '@models/GameProps';
 import Toast from 'react-native-toast-message';
-import { getMoneyInReal } from '@helpers/utils';
+import { authActions } from './auth-slice';
 
 export const fetchTypesData = () => {
   return async (dispatch: Dispatch) => {
@@ -110,6 +110,8 @@ export const listGames = ({ types, token, typesGame }: any) => {
   // const url = 'http://192.168.0.106:3333/bet/all-bets';
 
   return async (dispatch: Dispatch) => {
+    dispatch(authActions.setLoading());
+
     const sendRequest = async () => {
       const response = await fetch(url, {
         method: 'GET',
@@ -130,6 +132,7 @@ export const listGames = ({ types, token, typesGame }: any) => {
 
     try {
       const data = await sendRequest();
+      dispatch(authActions.setNotLoading());
 
       let loadedData: any = [];
 

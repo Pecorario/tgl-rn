@@ -8,11 +8,14 @@ import { RouteProps } from '@models/RoutesProps';
 import { Link, TextLink } from './styles';
 import { sendLogin } from '@store/auth-actions';
 import { authActions } from '@store/auth-slice';
+import { Loader } from '@components/Loader';
 
 export function Login({ navigation }: RouteProps) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
   const dispatch = useDispatch();
+  const loading = useSelector((state: RootStateOrAny) => state.auth.loading);
   const user = useSelector((state: RootStateOrAny) => state.auth.user);
   const message = useSelector((state: RootStateOrAny) => state.auth.message);
 
@@ -55,38 +58,41 @@ export function Login({ navigation }: RouteProps) {
   }, [user]);
 
   return (
-    <AuthScreens
-      type="secondary"
-      onPressInside={onSend}
-      onPressOutside={toRegistration}
-      textButtonInside="Log In"
-      textButtonOutside="Sign Up"
-      message={message}
-    >
-      <Input
-        placeholder="Email"
-        onChangeText={emailChangeHandler}
-        value={email}
-        keyboardType="email-address"
-        autoCapitalize="none"
-      />
-      <Input
-        placeholder="Password"
-        onChangeText={passwordChangeHandler}
-        value={password}
-        secureTextEntry={true}
-        autoCapitalize="none"
-      />
-      <TouchableOpacity
-        activeOpacity={0.6}
-        onPress={() => {
-          navigation.navigate('Forgot Password');
-        }}
+    <>
+      <Loader loading={loading} />
+      <AuthScreens
+        type="secondary"
+        onPressInside={onSend}
+        onPressOutside={toRegistration}
+        textButtonInside="Log In"
+        textButtonOutside="Sign Up"
+        message={message}
       >
-        <Link>
-          <TextLink>I forgot my password</TextLink>
-        </Link>
-      </TouchableOpacity>
-    </AuthScreens>
+        <Input
+          placeholder="Email"
+          onChangeText={emailChangeHandler}
+          value={email}
+          keyboardType="email-address"
+          autoCapitalize="none"
+        />
+        <Input
+          placeholder="Password"
+          onChangeText={passwordChangeHandler}
+          value={password}
+          secureTextEntry={true}
+          autoCapitalize="none"
+        />
+        <TouchableOpacity
+          activeOpacity={0.6}
+          onPress={() => {
+            navigation.navigate('Forgot Password');
+          }}
+        >
+          <Link>
+            <TextLink>I forgot my password</TextLink>
+          </Link>
+        </TouchableOpacity>
+      </AuthScreens>
+    </>
   );
 }

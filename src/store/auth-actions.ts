@@ -5,6 +5,7 @@ import Toast from 'react-native-toast-message';
 
 export const sendLogin = ({ email, password }: UserProps) => {
   return async (dispatch: Dispatch) => {
+    dispatch(authActions.setLoading());
     const sendRequest = async () => {
       const response = await fetch('http://192.168.0.106:3333/login', {
         method: 'POST',
@@ -31,13 +32,14 @@ export const sendLogin = ({ email, password }: UserProps) => {
 
     try {
       const { user, token } = await sendRequest();
+      dispatch(authActions.setNotLoading());
 
       dispatch(
         authActions.onLogin({
           id: user.id,
           name: user.name,
           email: user.email,
-          isAdmin: user['is_admin'],
+          isAdmin: user.is_admin,
           token: token.token
         })
       );
@@ -51,6 +53,8 @@ export const sendLogin = ({ email, password }: UserProps) => {
 
 export const getUserData = ({ token }: UserProps) => {
   return async (dispatch: Dispatch) => {
+    dispatch(authActions.setLoading());
+
     const sendRequest = async () => {
       const response = await fetch(
         'http://192.168.0.106:3333/user/my-account',
@@ -75,6 +79,7 @@ export const getUserData = ({ token }: UserProps) => {
 
     try {
       const { name, email } = await sendRequest();
+      dispatch(authActions.setNotLoading());
 
       dispatch(
         authActions.updateAccount({
@@ -95,6 +100,8 @@ export const getUserData = ({ token }: UserProps) => {
 
 export const updateUserData = ({ name, email, token }: UserProps) => {
   return async (dispatch: Dispatch) => {
+    dispatch(authActions.setLoading());
+
     const sendRequest = async () => {
       const response = await fetch('http://192.168.0.106:3333/user/update', {
         method: 'PUT',
@@ -120,6 +127,7 @@ export const updateUserData = ({ name, email, token }: UserProps) => {
 
     try {
       const { email, name } = await sendRequest();
+      dispatch(authActions.setNotLoading());
 
       dispatch(
         authActions.updateAccount({
@@ -145,6 +153,8 @@ export const updateUserData = ({ name, email, token }: UserProps) => {
 
 export const getToken = ({ email }: UserProps) => {
   return async (dispatch: Dispatch) => {
+    dispatch(authActions.setLoading());
+
     const sendRequest = async () => {
       const response = await fetch('http://192.168.0.106:3333/reset', {
         method: 'POST',
@@ -169,6 +179,7 @@ export const getToken = ({ email }: UserProps) => {
 
     try {
       const { token } = await sendRequest();
+      dispatch(authActions.setNotLoading());
 
       dispatch(
         authActions.addToken({
@@ -185,6 +196,8 @@ export const getToken = ({ email }: UserProps) => {
 
 export const updatePassword = ({ token, password }: UserProps) => {
   return async (dispatch: Dispatch) => {
+    dispatch(authActions.setLoading());
+
     const sendRequest = async () => {
       const response = await fetch(`http://192.168.0.106:3333/reset/${token}`, {
         method: 'POST',
@@ -208,6 +221,7 @@ export const updatePassword = ({ token, password }: UserProps) => {
 
     try {
       await sendRequest();
+      dispatch(authActions.setNotLoading());
       dispatch(authActions.removeToken());
 
       Toast.show({
@@ -227,6 +241,8 @@ export const updatePassword = ({ token, password }: UserProps) => {
 
 export const createUser = ({ email, password, name }: UserProps) => {
   return async (dispatch: Dispatch) => {
+    dispatch(authActions.setLoading());
+
     const sendRequest = async () => {
       const response = await fetch('http://192.168.0.106:3333/user/create', {
         method: 'POST',
@@ -252,6 +268,7 @@ export const createUser = ({ email, password, name }: UserProps) => {
 
     try {
       await sendRequest();
+      dispatch(authActions.setNotLoading());
       Toast.show({
         type: 'success',
         text1: 'Usuário criado com sucesso!'
