@@ -1,6 +1,8 @@
 import styled from 'styled-components/native';
 
-export const Container = styled.View``;
+export const Container = styled.View`
+  width: 100%;
+`;
 
 export const Line = styled.View`
   flex-direction: row;
@@ -16,9 +18,7 @@ export const Title = styled.Text`
 `;
 
 export const ContainerButtons = styled.View`
-  margin: 0 auto;
   flex-direction: row;
   align-items: center;
   justify-content: space-around;
-  width: 80%;
 `;

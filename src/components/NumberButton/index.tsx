@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import { TouchableOpacity } from 'react-native';
 import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
 import { gameActions } from '@store/game-slice';
+
 import { NumberButtonProps } from '@models/ButtonProps';
 import { Container, Text } from './styles';
-import { TouchableOpacity } from 'react-native';
 
 export function NumberButton({ number, color }: NumberButtonProps) {
   const [selected, setSelected] = useState(false);

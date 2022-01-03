@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Modal, ActivityIndicator } from 'react-native';
 
 import { Container, Wrapper, Text } from './styles';

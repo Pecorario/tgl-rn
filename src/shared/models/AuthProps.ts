@@ -1,5 +1,3 @@
-import { TypeProps } from '@models/GameProps';
-
 export interface UserProps {
   name?: string;
   email?: string;

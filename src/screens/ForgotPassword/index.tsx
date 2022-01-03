@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { AuthScreens, Input } from '@components/index';
 import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
 import { getToken, updatePassword } from '@store/auth-actions';
+import { authActions } from '@store/auth-slice';
+
+import { AuthScreens, Input } from '@components/index';
 
 import { RouteProps } from '@models/RoutesProps';
-import { authActions } from '@store/auth-slice';
 
 export function ForgotPassword({ navigation }: RouteProps) {
   const [email, setEmail] = useState('');

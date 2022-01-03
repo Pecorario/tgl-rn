@@ -1,9 +1,10 @@
 import React from 'react';
 import Modal from 'react-native-modal';
-import { CartProps } from '@models/UIProps';
-import { Container } from './styles';
+
 import { FormTypes } from '@components/FormTypes';
+
 import { TypeProps } from '@models/GameProps';
+import { Container } from './styles';
 
 interface ModalProps {
   data?: TypeProps;

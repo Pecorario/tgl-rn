@@ -1,6 +1,11 @@
 import React, { useEffect } from 'react';
+import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
+import { fetchTypesData, listGames } from '@store/game-actions';
+import { gameActions } from '@store/game-slice';
+
 import { TypeButton, Bet } from '@components/index';
 
+import { TypeProps } from '@models/GameProps';
 import {
   Container,
   Title,
@@ -9,10 +14,6 @@ import {
   FiltersContainer,
   EmptyGames
 } from './styles';
-import { fetchTypesData, listGames } from '@store/game-actions';
-import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
-import { gameActions } from '@store/game-slice';
-import { TypeProps } from '@models/GameProps';
 
 export function Home() {
   const dispatch = useDispatch();

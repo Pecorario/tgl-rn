@@ -1,10 +1,10 @@
 import React from 'react';
+import { RootStateOrAny, useSelector } from 'react-redux';
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import { HeaderButtons, NewBetButton } from '@components/index';
 import { AddType, EditTypes, Home, NewBet, Profile } from '@screens/index';
-import { RootStateOrAny, useSelector } from 'react-redux';
 
 const Tab = createBottomTabNavigator();
 

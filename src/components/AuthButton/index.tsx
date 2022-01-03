@@ -1,7 +1,7 @@
 import React from 'react';
 import { TouchableOpacity } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
 import { useTheme } from 'styled-components';
+import { Ionicons } from '@expo/vector-icons';
 
 import { AuthButtonProps } from '@models/ButtonProps';
 import { Container, TextView, Text } from './styles';

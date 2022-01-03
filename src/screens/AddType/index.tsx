@@ -1,11 +1,15 @@
 import React from 'react';
-import { Container } from './styles';
+
 import { FormTypes } from '@components/FormTypes';
+
+import { Container, Content } from './styles';
 
 export function AddType() {
   return (
     <Container>
-      <FormTypes title="Adicione um novo jogo" typeForm="add" />
+      <Content>
+        <FormTypes title="ADD A NEW GAME" typeForm="add" />
+      </Content>
     </Container>
   );
 }

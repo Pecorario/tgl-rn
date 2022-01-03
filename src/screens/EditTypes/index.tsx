@@ -1,7 +1,9 @@
-import { TypesDetail } from '@components/TypesDetails';
-import { fetchTypesData } from '@store/game-actions';
 import React, { useEffect } from 'react';
 import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
+import { fetchTypesData } from '@store/game-actions';
+
+import { TypesDetail } from '@components/TypesDetails';
+
 import { Container, Title, Content } from './styles';
 
 export function EditTypes() {
@@ -21,7 +23,7 @@ export function EditTypes() {
 
   return (
     <Container>
-      <Title>JOGOS CADASTRADOS</Title>
+      <Title>REGISTERED GAMES</Title>
       <Content>
         {typesGame.map((item: any) => {
           return (

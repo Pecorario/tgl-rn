@@ -1,7 +1,7 @@
 import React from 'react';
+import { useTheme } from 'styled-components';
 import { TouchableOpacity } from 'react-native';
 import { EvilIcons } from '@expo/vector-icons';
-import { useTheme } from 'styled-components';
 
 import { ButtonProps } from '@models/ButtonProps';
 

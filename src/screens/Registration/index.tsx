@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { createUser } from '@store/auth-actions';
+
 import { AuthScreens, Input } from '@components/index';
 
 import { RouteProps } from '@models/RoutesProps';

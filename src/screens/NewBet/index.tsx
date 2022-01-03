@@ -1,8 +1,11 @@
 import React, { useEffect } from 'react';
 import { useTheme } from 'styled-components';
+import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
+import { gameActions } from '@store/game-slice';
 
 import { TypeButton, Button, NumberButton } from '@components/index';
 
+import { TypeProps } from '@models/GameProps';
 import {
   Container,
   TitleContainer,
@@ -15,9 +18,6 @@ import {
   List,
   DetailsContainer
 } from './styles';
-import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
-import { gameActions } from '@store/game-slice';
-import { TypeProps } from '@models/GameProps';
 
 export function NewBet() {
   const theme = useTheme();

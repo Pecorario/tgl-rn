@@ -1,13 +1,16 @@
 import styled from 'styled-components/native';
 
-export const Container = styled.KeyboardAvoidingView`
-  height: 100%;
-  align-items: center;
-  justify-content: center;
+export const Container = styled.View`
   background: ${({ theme }) => theme.colors.background_primary};
 `;
 
-export const TitleContainer = styled.View`
+export const Content = styled.View`
+  height: 92%;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const TitleContent = styled.View`
   align-items: center;
 `;
 
@@ -54,12 +57,12 @@ export const Warning = styled.Text`
 `;
 
 export const Footer = styled.View`
-  position: absolute;
-  bottom: 2%;
+  padding: 5%;
 `;
 
 export const FooterText = styled.Text`
   font-family: ${({ theme }) => theme.fonts.regular};
   color: ${({ theme }) => theme.colors.text_title};
   font-size: 12px;
+  text-align: center;
 `;

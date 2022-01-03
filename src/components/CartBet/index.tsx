@@ -1,4 +1,8 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import { gameActions } from '@store/game-slice';
+import { getMoneyInReal } from '@shared/helpers/utils';
+
 import { TrashButton } from '@components/TrashButton';
 
 import { BetProps } from '@models/UIProps';
@@ -11,9 +15,6 @@ import {
   Content,
   TitleAndPrice
 } from './styles';
-import { useDispatch } from 'react-redux';
-import { getMoneyInReal } from '@helpers/utils';
-import { gameActions } from '@store/game-slice';
 
 export const CartBet = ({ price, title, numbers, color, id }: BetProps) => {
   const dispatch = useDispatch();

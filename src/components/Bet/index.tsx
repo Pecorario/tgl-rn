@@ -1,4 +1,5 @@
 import React from 'react';
+import { getMoneyInReal } from '@shared/helpers/utils';
 
 import { BetProps } from '@models/UIProps';
 import {
@@ -9,7 +10,6 @@ import {
   Marker,
   Content
 } from './styles';
-import { getMoneyInReal } from '@helpers/utils';
 
 export const Bet = ({ date, price, title, numbers, color }: BetProps) => {
   const formatNumbers = numbers.toString().replace(/,/g, ', ');
@@ -26,7 +26,7 @@ export const Bet = ({ date, price, title, numbers, color }: BetProps) => {
       <Content>
         <Numbers>{formatNumbers}</Numbers>
         <DateAndPrice>
-          {formatDate} - {formatPrice}
+          {formatDate} - ({formatPrice})
         </DateAndPrice>
         <Name color={color}>{title}</Name>
       </Content>

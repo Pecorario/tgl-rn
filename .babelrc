@@ -19,11 +19,12 @@
           "@assets": "./assets",
           "@components": "./src/components",
           "@styles": "./src/global/styles",
-          "@helpers": "./src/global/helpers",
-          "@models": "./src/global/models",
           "@navigation": "./src/navigation",
           "@screens": "./src/screens",
-          "@store": "./src/store"
+          "@store": "./src/store",
+          "@models": "./src/shared/models",
+          "@services": "./src/shared/services",
+          "@shared": "./src/shared"
         }
       }
     ]

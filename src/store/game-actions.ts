@@ -8,7 +8,7 @@ export const fetchTypesData = () => {
   return async (dispatch: Dispatch) => {
     dispatch(gameActions.setTypesNotLoaded());
     const fetchData = async () => {
-      const response = await fetch('http://192.168.0.106:3333/cart_games');
+      const response = await fetch('http://192.168.18.55:3333/cart_games');
 
       if (!response.ok) {
         throw new Error('Something went wrong!');
@@ -47,8 +47,8 @@ export const fetchTypesData = () => {
     } catch (error) {
       Toast.show({
         type: 'error',
-        text1: 'Algo inesperado aconteceu.',
-        text2: 'Tente novamente mais tarde.'
+        text1: 'Something wrong happened.',
+        text2: 'Try again later.'
       });
       console.log(error);
     }
@@ -68,7 +68,7 @@ export const saveGame = ({ games, token }: any) => {
 
   return async (dispatch: Dispatch) => {
     const sendRequest = async () => {
-      const response = await fetch('http://192.168.0.106:3333/bet/new-bet', {
+      const response = await fetch('http://192.168.18.55:3333/bet/new-bet', {
         method: 'POST',
         body: JSON.stringify({
           games: newGames
@@ -91,15 +91,16 @@ export const saveGame = ({ games, token }: any) => {
 
     try {
       await sendRequest();
+
       Toast.show({
         type: 'success',
-        text1: 'Apostas salvas com sucesso!'
+        text1: 'Success!'
       });
     } catch (error) {
       Toast.show({
         type: 'error',
-        text1: 'Algo inesperado aconteceu.',
-        text2: 'Tente novamente mais tarde.'
+        text1: 'Something wrong happened.',
+        text2: 'Try again later.'
       });
       console.log(error);
     }
@@ -116,8 +117,8 @@ export const listGames = ({ types, token, typesGame }: any) => {
   }
   const url =
     types.length > 0
-      ? `http://192.168.0.106:3333/bet/all-bets?${formatTypes}`
-      : 'http://192.168.0.106:3333/bet/all-bets';
+      ? `http://192.168.18.55:3333/bet/all-bets?${formatTypes}`
+      : 'http://192.168.18.55:3333/bet/all-bets';
 
   return async (dispatch: Dispatch) => {
     dispatch(authActions.setLoading());
@@ -163,11 +164,6 @@ export const listGames = ({ types, token, typesGame }: any) => {
       dispatch(gameActions.addFilteredGames({ filteredGames: loadedData }));
     } catch (error) {
       dispatch(authActions.setNotLoading());
-      Toast.show({
-        type: 'error',
-        text1: 'Algo inesperado aconteceu.',
-        text2: 'Tente novamente mais tarde.'
-      });
       console.log(error);
     }
   };

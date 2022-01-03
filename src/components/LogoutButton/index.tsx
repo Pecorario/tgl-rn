@@ -1,12 +1,11 @@
 import React from 'react';
 import { TouchableOpacity } from 'react-native';
-import { MaterialIcons } from '@expo/vector-icons';
 import { useDispatch } from 'react-redux';
+import { MaterialIcons } from '@expo/vector-icons';
+import { authActions } from '@store/auth-slice';
 
 import { ButtonHeaderProps } from '@models/ButtonProps';
 import { Container } from './styles';
-import { authActions } from '@store/auth-slice';
-import { RouteProps } from '@models/RoutesProps';
 
 export function LogoutButton({ color, navigation }: ButtonHeaderProps) {
   const dispatch = useDispatch();

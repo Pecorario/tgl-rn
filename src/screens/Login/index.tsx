@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { TouchableOpacity } from 'react-native';
 import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
+import { sendLogin } from '@store/auth-actions';
+import { authActions } from '@store/auth-slice';
 
-import { AuthScreens, Input } from '@components/index';
+import { AuthScreens, Input, Loader } from '@components/index';
 
 import { RouteProps } from '@models/RoutesProps';
 import { Link, TextLink } from './styles';
-import { sendLogin } from '@store/auth-actions';
-import { authActions } from '@store/auth-slice';
-import { Loader } from '@components/Loader';
 
 export function Login({ navigation }: RouteProps) {
   const [email, setEmail] = useState('');

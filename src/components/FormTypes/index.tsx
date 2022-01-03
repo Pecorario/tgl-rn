@@ -1,19 +1,18 @@
-import React, { useEffect, useState } from 'react';
-import { Container, Line, ContainerButtons, Title } from './styles';
+import React, { useState } from 'react';
 import { useTheme } from 'styled-components';
+import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
+import { createType, updateType } from '@store/auth-actions';
+
 import { InputProfile } from '@components/InputProfile';
 import { Button } from '@components/Button';
-import { TypeProps } from '@models/GameProps';
-import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
-import { authActions } from '@store/auth-slice';
-import { createType, updateType } from '@store/auth-actions';
-import { fetchTypesData } from '@store/game-actions';
 
+import { TypeProps } from '@models/GameProps';
+import { Container, Line, ContainerButtons, Title } from './styles';
 interface FormTypesProps {
   title: string;
   typeForm: 'add' | 'edit';
   data?: TypeProps;
-  onCancel: () => {};
+  onCancel?: () => void;
 }
 
 export function FormTypes({ title, typeForm, data, onCancel }: FormTypesProps) {
@@ -35,12 +34,23 @@ export function FormTypes({ title, typeForm, data, onCancel }: FormTypesProps) {
     typeForm === 'add' ? useState('') : useState(data?.color);
 
   const resetInputs = () => {
-    setType('');
-    setDescription('');
-    setRange('');
-    setPrice('');
-    setMaxNumber('');
-    setColor('');
+    if (typeForm === 'add') {
+      setType('');
+      setDescription('');
+      setRange('');
+      setPrice('');
+      setMaxNumber('');
+      setColor('');
+    } else {
+      if (data?.color !== undefined) {
+        setType(data?.name);
+        setDescription(data?.description);
+        setRange(data?.range.toString());
+        setPrice(data?.price.toString());
+        setMaxNumber(data?.maxNumber.toString());
+        setColor(data?.color);
+      }
+    }
   };
 
   const saveInputs = () => {
@@ -59,22 +69,23 @@ export function FormTypes({ title, typeForm, data, onCancel }: FormTypesProps) {
   const onSaveModal = () => {
     const newData = saveInputs();
     if (typeForm === 'add') {
-      console.log('Type Add');
       dispatch(createType({ data: newData, token }));
       resetInputs();
     } else {
       {
         data !== undefined && dispatch(updateType({ data: newData, token }));
       }
-      onCancel();
+      resetInputs();
     }
   };
 
   const onCancelModal = () => {
     if (typeForm === 'add') {
-      console.log('Cancel add');
+      resetInputs();
     } else {
-      onCancel();
+      if (onCancel !== undefined) {
+        onCancel();
+      }
     }
   };
 

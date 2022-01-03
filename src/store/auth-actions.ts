@@ -1,13 +1,13 @@
 import { Dispatch } from 'redux';
+import Toast from 'react-native-toast-message';
 import { authActions } from './auth-slice';
 import { UpdateTypeProps, UserProps } from '@models/AuthProps';
-import Toast from 'react-native-toast-message';
 
 export const sendLogin = ({ email, password }: UserProps) => {
   return async (dispatch: Dispatch) => {
     dispatch(authActions.setLoading());
     const sendRequest = async () => {
-      const response = await fetch('http://192.168.0.106:3333/login', {
+      const response = await fetch('http://192.168.18.55:3333/login', {
         method: 'POST',
         body: JSON.stringify({
           email: email,
@@ -44,7 +44,7 @@ export const sendLogin = ({ email, password }: UserProps) => {
         })
       );
     } catch (error) {
-      const message = 'Email e/ou senha inválidos';
+      const message = 'Invalid email or password';
       dispatch(authActions.addMessage({ message }));
       dispatch(authActions.setNotLoading());
       console.log(error);
@@ -58,7 +58,7 @@ export const getUserData = ({ token }: UserProps) => {
 
     const sendRequest = async () => {
       const response = await fetch(
-        'http://192.168.0.106:3333/user/my-account',
+        'http://192.168.18.55:3333/user/my-account',
         {
           method: 'GET',
           headers: {
@@ -91,8 +91,8 @@ export const getUserData = ({ token }: UserProps) => {
     } catch (error) {
       Toast.show({
         type: 'error',
-        text1: 'Algo inesperado aconteceu.',
-        text2: 'Tente novamente mais tarde.'
+        text1: 'Something wrong happened.',
+        text2: 'Try again later.'
       });
       dispatch(authActions.setNotLoading());
       console.log(error);
@@ -105,7 +105,7 @@ export const updateUserData = ({ name, email, token }: UserProps) => {
     dispatch(authActions.setLoading());
 
     const sendRequest = async () => {
-      const response = await fetch('http://192.168.0.106:3333/user/update', {
+      const response = await fetch('http://192.168.18.55:3333/user/update', {
         method: 'PUT',
         body: JSON.stringify({
           email: email,
@@ -140,13 +140,13 @@ export const updateUserData = ({ name, email, token }: UserProps) => {
 
       Toast.show({
         type: 'success',
-        text1: 'Alteração feita com sucesso!'
+        text1: 'Success!'
       });
     } catch (error) {
       Toast.show({
         type: 'error',
-        text1: 'Algo inesperado aconteceu.',
-        text2: 'Tente novamente mais tarde.'
+        text1: 'Something wrong happened.',
+        text2: 'Try again later.'
       });
       dispatch(authActions.setNotLoading());
       console.log(error);
@@ -159,7 +159,7 @@ export const getToken = ({ email }: UserProps) => {
     dispatch(authActions.setLoading());
 
     const sendRequest = async () => {
-      const response = await fetch('http://192.168.0.106:3333/reset', {
+      const response = await fetch('http://192.168.18.55:3333/reset', {
         method: 'POST',
         body: JSON.stringify({
           email: email
@@ -190,7 +190,7 @@ export const getToken = ({ email }: UserProps) => {
         })
       );
     } catch (error) {
-      const message = 'Email não encontrado.';
+      const message = 'Email not found.';
       dispatch(authActions.addMessage({ message }));
       console.log(error);
     }
@@ -202,7 +202,7 @@ export const updatePassword = ({ token, password }: UserProps) => {
     dispatch(authActions.setLoading());
 
     const sendRequest = async () => {
-      const response = await fetch(`http://192.168.0.106:3333/reset/${token}`, {
+      const response = await fetch(`http://192.168.18.55:3333/reset/${token}`, {
         method: 'POST',
         body: JSON.stringify({
           password: password
@@ -225,13 +225,13 @@ export const updatePassword = ({ token, password }: UserProps) => {
 
       Toast.show({
         type: 'success',
-        text1: 'Senha alterada com sucesso!'
+        text1: 'Success!'
       });
     } catch (error) {
       Toast.show({
         type: 'error',
-        text1: 'Algo inesperado aconteceu.',
-        text2: 'Tente novamente mais tarde.'
+        text1: 'Something wrong happened.',
+        text2: 'Try again later.'
       });
       dispatch(authActions.setNotLoading());
       console.log(error);
@@ -244,7 +244,7 @@ export const createUser = ({ email, password, name }: UserProps) => {
     dispatch(authActions.setLoading());
 
     const sendRequest = async () => {
-      const response = await fetch('http://192.168.0.106:3333/user/create', {
+      const response = await fetch('http://192.168.18.55:3333/user/create', {
         method: 'POST',
         body: JSON.stringify({
           email: email,
@@ -271,13 +271,13 @@ export const createUser = ({ email, password, name }: UserProps) => {
       dispatch(authActions.setNotLoading());
       Toast.show({
         type: 'success',
-        text1: 'Usuário criado com sucesso!'
+        text1: 'Success!'
       });
     } catch (error) {
       Toast.show({
         type: 'error',
-        text1: 'Algo inesperado aconteceu.',
-        text2: 'Tente novamente mais tarde.'
+        text1: 'Something wrong happened.',
+        text2: 'Try again later.'
       });
       dispatch(authActions.setNotLoading());
       console.log(error);
@@ -293,7 +293,7 @@ export const updateType = ({ data, token }: UpdateTypeProps) => {
 
     const sendRequest = async () => {
       const response = await fetch(
-        `http://192.168.0.106:3333/admin/update-game/${id}`,
+        `http://192.168.18.55:3333/admin/update-game/${id}`,
         {
           method: 'PUT',
           body: JSON.stringify({
@@ -328,13 +328,13 @@ export const updateType = ({ data, token }: UpdateTypeProps) => {
 
       Toast.show({
         type: 'success',
-        text1: 'Alteração feita com sucesso!'
+        text1: 'Success!'
       });
     } catch (error) {
       Toast.show({
         type: 'error',
-        text1: 'Algo inesperado aconteceu.',
-        text2: 'Tente novamente mais tarde.'
+        text1: 'Something wrong happened.',
+        text2: 'Try again later.'
       });
       dispatch(authActions.setNotLoading());
       dispatch(authActions.defaultChanges());
@@ -345,14 +345,13 @@ export const updateType = ({ data, token }: UpdateTypeProps) => {
 
 export const createType = ({ data, token }: UpdateTypeProps) => {
   const { name, description, range, price, maxNumber, color } = data;
-  console.log('Nem aqui?');
   return async (dispatch: Dispatch) => {
     dispatch(authActions.setLoading());
     dispatch(authActions.defaultChanges());
 
     const sendRequest = async () => {
       const response = await fetch(
-        `http://192.168.0.106:3333/admin/create-game`,
+        `http://192.168.18.55:3333/admin/create-game`,
         {
           method: 'POST',
           body: JSON.stringify({
@@ -382,19 +381,18 @@ export const createType = ({ data, token }: UpdateTypeProps) => {
 
     try {
       await sendRequest();
-      console.log('Acho que foi');
       dispatch(authActions.saveChanges());
       dispatch(authActions.setNotLoading());
 
       Toast.show({
         type: 'success',
-        text1: 'Alteração feita com sucesso!'
+        text1: 'Success!'
       });
     } catch (error) {
       Toast.show({
         type: 'error',
-        text1: 'Algo inesperado aconteceu.',
-        text2: 'Tente novamente mais tarde.'
+        text1: 'Something wrong happened.',
+        text2: 'Try again later.'
       });
       dispatch(authActions.setNotLoading());
       dispatch(authActions.defaultChanges());
@@ -404,14 +402,13 @@ export const createType = ({ data, token }: UpdateTypeProps) => {
 };
 
 export const deleteType = ({ id, token }: UpdateTypeProps) => {
-  console.log('Chegou qual id:', id);
   return async (dispatch: Dispatch) => {
     dispatch(authActions.setLoading());
     dispatch(authActions.defaultChanges());
 
     const sendRequest = async () => {
       const response = await fetch(
-        `http://192.168.0.106:3333/admin/delete-game/${id}`,
+        `http://192.168.18.55:3333/admin/delete-game/${id}`,
         {
           method: 'DELETE',
           headers: {
@@ -429,19 +426,18 @@ export const deleteType = ({ id, token }: UpdateTypeProps) => {
 
     try {
       await sendRequest();
-      console.log('Foi mermao');
       dispatch(authActions.saveChanges());
       dispatch(authActions.setNotLoading());
 
       Toast.show({
         type: 'success',
-        text1: 'Jogo deletado com sucesso!'
+        text1: 'Success!'
       });
     } catch (error) {
       Toast.show({
         type: 'error',
-        text1: 'Algo inesperado aconteceu.',
-        text2: 'Tente novamente mais tarde.'
+        text1: 'Something wrong happened.',
+        text2: 'Try again later.'
       });
       dispatch(authActions.setNotLoading());
       dispatch(authActions.defaultChanges());

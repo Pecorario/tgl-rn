@@ -1,6 +1,10 @@
 import React from 'react';
 import Modal from 'react-native-modal';
-import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
+import { useTheme } from 'styled-components';
+import { RootStateOrAny, useSelector } from 'react-redux';
+import { Ionicons } from '@expo/vector-icons';
+import { getMoneyInReal } from '@shared/helpers/utils';
+
 import { CartBet } from '@components/CartBet';
 
 import { CartProps } from '@models/UIProps';
@@ -15,9 +19,6 @@ import {
   EmptyCart,
   SaveText
 } from './styles';
-import { getMoneyInReal } from '@helpers/utils';
-import { Ionicons } from '@expo/vector-icons';
-import { useTheme } from 'styled-components';
 
 export function Cart({ visible = false, onClose, onSave }: CartProps) {
   const theme = useTheme();
@@ -47,7 +48,7 @@ export function Cart({ visible = false, onClose, onSave }: CartProps) {
         <Content>
           <Title>CART</Title>
           {games.length === 0 ? (
-            <EmptyCart>Carrinho vazio!</EmptyCart>
+            <EmptyCart>Empty cart!</EmptyCart>
           ) : (
             <List
               data={games}

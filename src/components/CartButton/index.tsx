@@ -1,15 +1,16 @@
 import React from 'react';
 import { TouchableOpacity } from 'react-native';
-import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
 import { useTheme } from 'styled-components';
+import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
 import { FontAwesome5 } from '@expo/vector-icons';
+import { gameActions } from '@store/game-slice';
+import { listGames, saveGame } from '@store/game-actions';
+import { getMoneyInReal } from '@shared/helpers/utils';
+
 import { Cart } from '@components/Cart';
 
-import { gameActions } from '@store/game-slice';
 import { ButtonProps } from '@models/ButtonProps';
 import { Container } from './styles';
-import { saveGame } from '@store/game-actions';
-import { getMoneyInReal } from '@helpers/utils';
 
 export function CartButton({ color }: ButtonProps) {
   const theme = useTheme();
@@ -26,6 +27,7 @@ export function CartButton({ color }: ButtonProps) {
     (state: RootStateOrAny) => state.game.minCartValue
   );
   const { token } = useSelector((state: RootStateOrAny) => state.auth.user);
+  const typesGame = useSelector((state: RootStateOrAny) => state.game.types);
 
   const formatCartValue = getMoneyInReal(Number(minCartValue));
 

@@ -6,7 +6,8 @@ import { AuthButton } from '@components/AuthButton';
 import { AuthScreensProps } from '@models/UIProps';
 import {
   Container,
-  TitleContainer,
+  Content,
+  TitleContent,
   Title,
   PreTitle,
   Separator,
@@ -29,16 +30,16 @@ export function AuthScreens({
   const year = new Date().getFullYear();
 
   return (
-    <SafeAreaView>
+    <Container>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <Container>
-          <TitleContainer>
+        <Content>
+          <TitleContent>
             <PreTitle>The Greatest App</PreTitle>
             <Separator>
               <SeparatorText>for</SeparatorText>
             </Separator>
             <Title>LOTTERY</Title>
-          </TitleContainer>
+          </TitleContent>
           <Box>
             {children}
             <AuthButton
@@ -53,11 +54,11 @@ export function AuthScreens({
             title={textButtonOutside}
             type={type}
           />
-          <Footer>
-            <FooterText>Copyright {year} Luby Software</FooterText>
-          </Footer>
-        </Container>
+        </Content>
       </TouchableWithoutFeedback>
-    </SafeAreaView>
+      <Footer>
+        <FooterText>Copyright {year} Luby Software</FooterText>
+      </Footer>
+    </Container>
   );
 }

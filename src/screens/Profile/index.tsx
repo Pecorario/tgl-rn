@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Keyboard, TouchableWithoutFeedback } from 'react-native';
 import { useTheme } from 'styled-components';
-import { Button, InputProfile } from '@components/index';
-import { getUserData, updateUserData } from '@store/auth-actions';
 import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
+import { getUserData, updateUserData } from '@store/auth-actions';
+
+import { Button, InputProfile } from '@components/index';
 
 import { Container, Box, ContainerButtons } from './styles';
 

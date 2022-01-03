@@ -1,7 +1,14 @@
 import React, { useState } from 'react';
-import { TypeProps } from '@models/GameProps';
+import { Alert } from 'react-native';
 import { useTheme } from 'styled-components';
+import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
+import { Feather } from '@expo/vector-icons';
+import { deleteType } from '@store/auth-actions';
+import { getMoneyInReal } from '@shared/helpers/utils';
 
+import { ModalDetail } from '@components/ModalDetail';
+
+import { TypeProps } from '@models/GameProps';
 import {
   Container,
   Title,
@@ -13,12 +20,6 @@ import {
   Button,
   ContainerButtons
 } from './styles';
-import { getMoneyInReal } from '@helpers/utils';
-import { Feather } from '@expo/vector-icons';
-import { ModalDetail } from '@components/ModalDetail';
-import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
-import { Alert } from 'react-native';
-import { deleteType } from '@store/auth-actions';
 
 export function TypesDetail({
   id,

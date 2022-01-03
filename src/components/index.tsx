@@ -8,6 +8,7 @@ import { InputProfile } from '@components/InputProfile';
 import { Bet } from '@components/Bet';
 import { NewBetButton } from '@components/NewBetButton';
 import { NumberButton } from '@components/NumberButton';
+import { Loader } from '@components/Loader';
 
 export {
   AuthScreens,
@@ -19,5 +20,6 @@ export {
   InputProfile,
   Bet,
   NewBetButton,
-  NumberButton
+  NumberButton,
+  Loader
 };
