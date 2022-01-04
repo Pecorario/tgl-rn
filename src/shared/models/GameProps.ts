@@ -18,6 +18,17 @@ export interface BetProps {
   numbers: number[] | string;
   date?: string;
 }
+
+export interface ReqGameProps {
+  games?: any;
+}
+
+export interface ReqSaveGameProps {
+  games: {
+    id: number | undefined;
+    numbers: number[] | string;
+  }[];
+}
 export interface GameProps {
   cartIsOpen: boolean;
   types: Array<TypeProps>;
@@ -31,4 +42,5 @@ export interface GameProps {
   totalPrice: number;
   counter: number;
   typesLoaded: boolean;
+  savedGames: boolean;
 }

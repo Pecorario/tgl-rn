@@ -14,7 +14,8 @@ const initialState: GameProps = {
   selectedNumbers: [],
   totalPrice: 0,
   counter: 0,
-  typesLoaded: false
+  typesLoaded: false,
+  savedGames: false
 };
 
 const gameSlice = createSlice({
@@ -233,6 +234,12 @@ const gameSlice = createSlice({
     },
     setTypesNotLoaded(state) {
       state.typesLoaded = false;
+    },
+    saveChanges(state) {
+      state.savedGames = true;
+    },
+    defaultChanges(state) {
+      state.savedGames = false;
     }
   }
 });

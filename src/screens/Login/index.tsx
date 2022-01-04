@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { TouchableOpacity } from 'react-native';
+import { TextInput, TouchableOpacity } from 'react-native';
 import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
 import { sendLogin } from '@store/auth-actions';
 import { authActions } from '@store/auth-slice';
@@ -85,8 +85,8 @@ export function Login({ navigation }: RouteProps) {
           placeholder="Password"
           onChangeText={passwordChangeHandler}
           value={password}
-          secureTextEntry={true}
           autoCapitalize="none"
+          secureTextEntry={true}
         />
         <TouchableOpacity activeOpacity={0.6} onPress={onLink}>
           <Link>

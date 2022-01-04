@@ -8,8 +8,6 @@ export function Input({
   value,
   placeholder,
   onChangeText,
-  keyboardType,
-  secureTextEntry,
   message,
   ...rest
 }: InputProps) {
@@ -23,8 +21,6 @@ export function Input({
         placeholder={placeholder}
         onChangeText={onChangeText}
         placeholderTextColor={theme.colors.text_label}
-        keyboardType={keyboardType}
-        secureTextEntry={secureTextEntry}
       />
       {message !== '' && <Warning>{message}</Warning>}
     </Container>

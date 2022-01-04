@@ -5,6 +5,13 @@ export interface UserProps {
   token?: string;
 }
 
+export interface ResetPasswordProps {
+  req: {
+    password: string | undefined;
+  };
+  token: string | null;
+}
+
 export interface AuthProps {
   user: {
     id: number;
@@ -19,8 +26,19 @@ export interface AuthProps {
   saved: boolean;
 }
 
-export interface UpdateTypeProps {
+export interface BodyReqTypeProps {
   data?: any;
   id?: number;
-  token: string;
+}
+
+export interface ReqTypeProps {
+  req?: {
+    type: string;
+    description: string;
+    range: number;
+    price: number;
+    max_number: number;
+    color: string;
+  };
+  id?: number;
 }

@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { AuthProps } from '@models/AuthProps';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const initialState: AuthProps = {
   user: null,
@@ -26,6 +27,7 @@ const authSlice = createSlice({
     },
     onLogout(state) {
       state.user = null;
+      AsyncStorage.removeItem('token');
     },
     updateAccount(state, action) {
       const { name, email } = action.payload;
@@ -41,6 +43,7 @@ const authSlice = createSlice({
     },
     removeToken(state) {
       state.tokenPassword = '';
+      AsyncStorage.removeItem('token');
     },
     addMessage(state, action) {
       const msg = action.payload.message;

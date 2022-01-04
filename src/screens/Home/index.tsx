@@ -28,12 +28,21 @@ export function Home() {
   const typesLoaded = useSelector(
     (state: RootStateOrAny) => state.game.typesLoaded
   );
+  const savedGames = useSelector(
+    (state: RootStateOrAny) => state.game.savedGames
+  );
   const { token } = useSelector((state: RootStateOrAny) => state.auth.user);
 
   useEffect(() => {
     dispatch(fetchTypesData());
     dispatch(gameActions.resetFilters());
   }, []);
+
+  useEffect(() => {
+    if (savedGames) {
+      dispatch(listGames({ types: filtersActive, token, typesGame }));
+    }
+  }, [savedGames]);
 
   useEffect(() => {
     if (

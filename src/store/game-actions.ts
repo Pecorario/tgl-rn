@@ -1,26 +1,18 @@
 import { Dispatch } from 'redux';
 import { gameActions } from './game-slice';
-import { BetProps, TypeProps } from '@models/GameProps';
+import { BetProps, TypeProps, ReqGameProps } from '@models/GameProps';
 import Toast from 'react-native-toast-message';
+import { gameServices } from '@shared/services/games';
 import { authActions } from './auth-slice';
 
 export const fetchTypesData = () => {
   return async (dispatch: Dispatch) => {
     dispatch(gameActions.setTypesNotLoaded());
-    const fetchData = async () => {
-      const response = await fetch('http://192.168.18.55:3333/cart_games');
-
-      if (!response.ok) {
-        throw new Error('Something went wrong!');
-      }
-
-      const data = await response.json();
-
-      return data;
-    };
 
     try {
-      const gamesData = await fetchData();
+      const response = await gameServices().getTypes();
+      const gamesData = response.data;
+
       dispatch(gameActions.setTypesLoaded());
 
       const loadedGames: TypeProps[] = [];
@@ -50,47 +42,31 @@ export const fetchTypesData = () => {
         text1: 'Something wrong happened.',
         text2: 'Try again later.'
       });
-      console.log(error);
     }
   };
 };
 
-export const saveGame = ({ games, token }: any) => {
-  let newGames: { id: number | undefined; numbers: number[] | string }[] = [];
-
-  games.map((game: BetProps) => {
-    const item = {
-      id: game.idType,
-      numbers: game.numbers
-    };
-    newGames.push(item);
-  });
-
+export const saveGame = ({ games }: ReqGameProps) => {
   return async (dispatch: Dispatch) => {
-    const sendRequest = async () => {
-      const response = await fetch('http://192.168.18.55:3333/bet/new-bet', {
-        method: 'POST',
-        body: JSON.stringify({
-          games: newGames
-        }),
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-          Authorization: `Bearer ${token}`
-        }
-      });
+    let newGames: { id: number | undefined; numbers: number[] | string }[] = [];
 
-      const data = await response.json();
+    games.map((game: BetProps) => {
+      const item = {
+        id: game.idType,
+        numbers: game.numbers
+      };
+      newGames.push(item);
+    });
 
-      if (!response.ok) {
-        throw new Error('NewBet failed!');
-      }
-
-      return data;
+    const body = {
+      games: newGames
     };
+
+    dispatch(gameActions.defaultChanges());
 
     try {
-      await sendRequest();
+      await gameServices().saveGame(body);
+      dispatch(gameActions.saveChanges());
 
       Toast.show({
         type: 'success',
