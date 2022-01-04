@@ -1,6 +1,6 @@
+import Toast from 'react-native-toast-message';
 import { createSlice } from '@reduxjs/toolkit';
 import { GameProps, TypeProps, BetProps } from '@models/GameProps';
-import Toast from 'react-native-toast-message';
 
 const initialState: GameProps = {
   cartIsOpen: false,
@@ -82,15 +82,12 @@ const gameSlice = createSlice({
             const existingItem = game.name;
             if (existingItem) {
               state.filtersActive = state.filtersActive.filter(
-                (name: string) =>
-                  name !== `type%5B%5D=${encodeURIComponent(existingItem)}`
+                (name: string) => name !== existingItem
               );
             }
             return (game.selected = false);
           } else {
-            state.filtersActive.push(
-              'type%5B%5D=' + encodeURIComponent(game.name)
-            );
+            state.filtersActive.push(game.name);
             return (game.selected = true);
           }
         }
@@ -126,8 +123,8 @@ const gameSlice = createSlice({
       } else {
         Toast.show({
           type: 'warn',
-          text1: 'Máximo de números atingido.',
-          text2: 'Limpe o jogo ou adicione ao carrinho.'
+          text1: 'Max of numbers picked.',
+          text2: 'Clean your game ou add it to cart.'
         });
         return;
       }
@@ -181,20 +178,20 @@ const gameSlice = createSlice({
           if (missingNumbers === 1) {
             Toast.show({
               type: 'warn',
-              text1: `${missingNumbers} número faltando!`
+              text1: `${missingNumbers} missing number!`
             });
             return;
           }
           Toast.show({
             type: 'warn',
-            text1: `${missingNumbers} números faltando!`
+            text1: `${missingNumbers} missing numbers!`
           });
           return;
         } else if (isThisGameAlreadyPicked(state.selectedNumbers)) {
           state.selectedNumbers = [];
           Toast.show({
             type: 'warn',
-            text1: 'Este jogo já foi escolhido por você.'
+            text1: 'This game has already been picked by you.'
           });
           return;
         }

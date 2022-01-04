@@ -29,6 +29,12 @@ export interface ReqSaveGameProps {
     numbers: number[] | string;
   }[];
 }
+
+export interface ReqListGameProps {
+  req?: string[];
+  types?: any;
+  typesGame?: Array<TypeProps>;
+}
 export interface GameProps {
   cartIsOpen: boolean;
   types: Array<TypeProps>;

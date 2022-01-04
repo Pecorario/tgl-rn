@@ -1,9 +1,14 @@
+import Toast from 'react-native-toast-message';
 import { Dispatch } from 'redux';
 import { gameActions } from './game-slice';
-import { BetProps, TypeProps, ReqGameProps } from '@models/GameProps';
-import Toast from 'react-native-toast-message';
 import { gameServices } from '@shared/services/games';
 import { authActions } from './auth-slice';
+import {
+  BetProps,
+  TypeProps,
+  ReqGameProps,
+  ReqListGameProps
+} from '@models/GameProps';
 
 export const fetchTypesData = () => {
   return async (dispatch: Dispatch) => {
@@ -78,53 +83,24 @@ export const saveGame = ({ games }: ReqGameProps) => {
         text1: 'Something wrong happened.',
         text2: 'Try again later.'
       });
-      console.log(error);
     }
   };
 };
 
-export const listGames = ({ types, token, typesGame }: any) => {
-  let formatTypes;
-  if (types || types.length > 0) {
-    types.map((type: string) => {
-      type = encodeURIComponent(type);
-    });
-    formatTypes = types.toString().replace(/,/g, '&');
-  }
-  const url =
-    types.length > 0
-      ? `http://192.168.18.55:3333/bet/all-bets?${formatTypes}`
-      : 'http://192.168.18.55:3333/bet/all-bets';
-
+export const listGames = ({ types, typesGame }: ReqListGameProps) => {
   return async (dispatch: Dispatch) => {
     dispatch(authActions.setLoading());
 
-    const sendRequest = async () => {
-      const response = await fetch(url, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-          Authorization: `Bearer ${token}`
-        }
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error('GetGames failed!');
-      }
-      return data;
-    };
-
     try {
-      const data = await sendRequest();
+      const response = await gameServices().listGames(types);
+      const data = response.data;
+
       dispatch(authActions.setNotLoading());
 
       let loadedData: any = [];
 
       data.map((item: any) => {
-        const auxColor = typesGame.find(
+        const auxColor = typesGame?.find(
           (type: any) => type.id === item.type.id
         );
         const game = {
@@ -132,7 +108,7 @@ export const listGames = ({ types, token, typesGame }: any) => {
           name: item.type.type,
           price: item.price,
           numbers: item.choosen_numbers,
-          color: auxColor.color,
+          color: auxColor?.color,
           date: item.created_at
         };
         loadedData.push(game);
@@ -140,7 +116,6 @@ export const listGames = ({ types, token, typesGame }: any) => {
       dispatch(gameActions.addFilteredGames({ filteredGames: loadedData }));
     } catch (error) {
       dispatch(authActions.setNotLoading());
-      console.log(error);
     }
   };
 };

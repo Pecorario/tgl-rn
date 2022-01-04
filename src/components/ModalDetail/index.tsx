@@ -3,14 +3,8 @@ import Modal from 'react-native-modal';
 
 import { FormTypes } from '@components/FormTypes';
 
-import { TypeProps } from '@models/GameProps';
+import { ModalProps } from '@models/UIProps';
 import { Container } from './styles';
-
-interface ModalProps {
-  data?: TypeProps;
-  visible: boolean;
-  onClose: () => {} | any;
-}
 
 export function ModalDetail({ visible, onClose, data }: ModalProps) {
   return (
@@ -21,7 +15,7 @@ export function ModalDetail({ visible, onClose, data }: ModalProps) {
     >
       <Container>
         <FormTypes
-          title="Editar jogo"
+          title="EDIT GAME"
           typeForm="edit"
           data={data}
           onCancel={onClose}

@@ -1,11 +1,7 @@
 import styled from 'styled-components/native';
+import { StyledProps } from '@models/UIProps';
 
-interface ColorProps {
-  color?: string;
-  selected?: boolean;
-}
-
-export const Container = styled.View<ColorProps>`
+export const Container = styled.View<StyledProps>`
   background: ${props =>
     props.selected ? props.color : props.theme.colors.tertiary};
   width: 45px;

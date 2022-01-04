@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Alert } from 'react-native';
 import { useTheme } from 'styled-components';
-import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Feather } from '@expo/vector-icons';
 import { deleteType } from '@store/auth-actions';
 import { getMoneyInReal } from '@shared/helpers/utils';
@@ -33,7 +33,6 @@ export function TypesDetail({
   const theme = useTheme();
   const [visible, setVisible] = useState(false);
   const dispatch = useDispatch();
-  const { token } = useSelector((state: RootStateOrAny) => state.auth.user);
 
   const openModal = () => {
     setVisible(true);
@@ -49,7 +48,7 @@ export function TypesDetail({
         text: 'Cancel',
         style: 'cancel'
       },
-      { text: 'OK', onPress: () => dispatch(deleteType({ id, token })) }
+      { text: 'OK', onPress: () => dispatch(deleteType({ id })) }
     ]);
   };
 

@@ -1,24 +1,17 @@
 import React, { useState } from 'react';
 import { useTheme } from 'styled-components';
-import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { createType, updateType } from '@store/auth-actions';
 
 import { InputProfile } from '@components/InputProfile';
 import { Button } from '@components/Button';
 
-import { TypeProps } from '@models/GameProps';
+import { FormTypesProps } from '@models/UIProps';
 import { Container, Line, ContainerButtons, Title } from './styles';
-interface FormTypesProps {
-  title: string;
-  typeForm: 'add' | 'edit';
-  data?: TypeProps;
-  onCancel?: () => void;
-}
 
 export function FormTypes({ title, typeForm, data, onCancel }: FormTypesProps) {
   const theme = useTheme();
   const dispatch = useDispatch();
-  const { token } = useSelector((state: RootStateOrAny) => state.auth.user);
 
   const [type, setType] =
     typeForm === 'add' ? useState('') : useState(data?.name);
@@ -69,11 +62,11 @@ export function FormTypes({ title, typeForm, data, onCancel }: FormTypesProps) {
   const onSaveModal = () => {
     const newData = saveInputs();
     if (typeForm === 'add') {
-      dispatch(createType({ data: newData, token }));
+      dispatch(createType({ data: newData }));
       resetInputs();
     } else {
       {
-        data !== undefined && dispatch(updateType({ data: newData, token }));
+        data !== undefined && dispatch(updateType({ data: newData }));
       }
       resetInputs();
     }

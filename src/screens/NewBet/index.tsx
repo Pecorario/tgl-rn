@@ -58,15 +58,6 @@ export function NewBet() {
     <NumberButton number={item} color={typeActive.color} />
   );
 
-  const renderGame = ({ item }: any) => (
-    <TypeButton
-      active={item.selected}
-      title={item.name}
-      color={item.color}
-      onPress={() => selectType(item.name)}
-    />
-  );
-
   return (
     <Container>
       <TitleContainer>

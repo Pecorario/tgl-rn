@@ -1,3 +1,5 @@
+import { TypeProps } from '@models/GameProps';
+
 export interface AuthScreensProps {
   type: 'secondary' | 'tertiary';
   children: React.ReactNode;
@@ -22,4 +24,22 @@ export interface CartProps {
   onClose: () => void;
   onOpen?: () => void;
   onSave: () => void;
+}
+
+export interface StyledProps {
+  color?: string;
+  selected?: boolean;
+}
+
+export interface FormTypesProps {
+  title: string;
+  typeForm: 'add' | 'edit';
+  data?: TypeProps;
+  onCancel?: () => void;
+}
+
+export interface ModalProps {
+  data?: TypeProps;
+  visible: boolean;
+  onClose: () => {} | any;
 }

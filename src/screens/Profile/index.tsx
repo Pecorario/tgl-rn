@@ -18,12 +18,12 @@ export function Profile() {
   const [email, setEmail] = useState(user.email);
 
   useEffect(() => {
-    dispatch(getUserData({ token: user.token }));
+    dispatch(getUserData());
   }, []);
 
   const saveEditHandler = () => {
-    dispatch(updateUserData({ name: name, email: email, token: user.token }));
-    getUserData({ token: user.token });
+    dispatch(updateUserData({ name: name, email: email }));
+    getUserData();
     setIsEdit(false);
   };
 

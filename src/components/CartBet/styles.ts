@@ -1,8 +1,5 @@
 import styled from 'styled-components/native';
-
-interface ColorProps {
-  color: string;
-}
+import { StyledProps } from '@models/UIProps';
 
 export const Container = styled.View`
   position: relative;
@@ -12,7 +9,7 @@ export const Container = styled.View`
   width: 100%;
 `;
 
-export const Marker = styled.View<ColorProps>`
+export const Marker = styled.View<StyledProps>`
   position: absolute;
   height: 100%;
   width: 5px;
@@ -43,7 +40,7 @@ export const Price = styled.Text`
   font-size: 15px;
 `;
 
-export const Name = styled.Text<ColorProps>`
+export const Name = styled.Text<StyledProps>`
   font-family: ${({ theme }) => theme.fonts.italicBold};
   color: ${props => props.color};
   font-size: 15px;

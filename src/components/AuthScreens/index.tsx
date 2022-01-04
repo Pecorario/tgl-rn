@@ -1,5 +1,5 @@
 import React from 'react';
-import { Keyboard, SafeAreaView, TouchableWithoutFeedback } from 'react-native';
+import { Keyboard, TouchableWithoutFeedback } from 'react-native';
 
 import { AuthButton } from '@components/AuthButton';
 

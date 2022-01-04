@@ -31,7 +31,6 @@ export function Home() {
   const savedGames = useSelector(
     (state: RootStateOrAny) => state.game.savedGames
   );
-  const { token } = useSelector((state: RootStateOrAny) => state.auth.user);
 
   useEffect(() => {
     dispatch(fetchTypesData());
@@ -40,7 +39,7 @@ export function Home() {
 
   useEffect(() => {
     if (savedGames) {
-      dispatch(listGames({ types: filtersActive, token, typesGame }));
+      dispatch(listGames({ types: filtersActive, typesGame }));
     }
   }, [savedGames]);
 
@@ -50,9 +49,9 @@ export function Home() {
       typesLoaded === true &&
       typesGame !== undefined
     ) {
-      dispatch(listGames({ types: filtersActive, token, typesGame }));
+      dispatch(listGames({ types: filtersActive, typesGame }));
     }
-  }, [filtersActive, typesGame, token, typesLoaded]);
+  }, [filtersActive, typesGame, typesLoaded]);
 
   const selectFilter = (name: string) => {
     dispatch(gameActions.selectFilter({ name }));

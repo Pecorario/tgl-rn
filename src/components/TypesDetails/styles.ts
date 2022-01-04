@@ -1,8 +1,5 @@
 import styled from 'styled-components/native';
-
-interface ColorProps {
-  color?: string;
-}
+import { StyledProps } from '@models/UIProps';
 
 export const Container = styled.View``;
 
@@ -10,7 +7,7 @@ export const Content = styled.View`
   padding-left: 2%;
 `;
 
-export const Title = styled.Text<ColorProps>`
+export const Title = styled.Text<StyledProps>`
   font-family: ${({ theme }) => theme.fonts.bold};
   color: ${props => props.color};
   font-size: 18px;
@@ -32,7 +29,7 @@ export const TitleCategory = styled.Text`
   margin-right: 1%;
 `;
 
-export const Details = styled.Text<ColorProps>`
+export const Details = styled.Text<StyledProps>`
   font-family: ${({ theme }) => theme.fonts.regular};
   color: ${props =>
     props.color ? props.color : props.theme.colors.text_label};

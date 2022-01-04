@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { TextInput, TouchableOpacity } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
 import { sendLogin } from '@store/auth-actions';
 import { authActions } from '@store/auth-slice';
@@ -31,7 +31,7 @@ export function Login({ navigation }: RouteProps) {
     if (email.trim() === '' || password.trim() === '') {
       dispatch(
         authActions.addMessage({
-          message: 'Todos os campos devem ser preenchidos.'
+          message: 'Email and password cannot be empty.'
         })
       );
     } else {

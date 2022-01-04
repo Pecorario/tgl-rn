@@ -38,10 +38,10 @@ export function ForgotPassword({ navigation }: RouteProps) {
         setMessage('');
         dispatch(getToken({ email }));
       } else {
-        setMessage('Email inválido.');
+        setMessage('Invalid email.');
       }
     } else {
-      dispatch(updatePassword({ token, password }));
+      dispatch(updatePassword({ password }));
       navigation.navigate('Login');
     }
   };

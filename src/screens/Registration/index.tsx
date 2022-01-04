@@ -33,21 +33,21 @@ export function Registration({ navigation }: RouteProps) {
       setMessageEmail('');
       setEmailIsValid(true);
     } else {
-      setMessageEmail('Email inválido.');
+      setMessageEmail('Invalid email.');
       setEmailIsValid(false);
     }
     if (password.trim().length > 5) {
       setMessagePassword('');
       setPasswordIsValid(true);
     } else {
-      setMessagePassword('Senha precisa ter pelo menos 6 caracteres.');
+      setMessagePassword('The password contains fewer than six characters.');
       setPasswordIsValid(false);
     }
     if (name.trim().length > 0) {
       setMessageName('');
       setNameIsValid(true);
     } else {
-      setMessageName('Nome não pode ser vazio.');
+      setMessageName('Name cannot be empty.');
       setNameIsValid(false);
     }
   };

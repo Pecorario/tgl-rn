@@ -4,7 +4,7 @@ import { useTheme } from 'styled-components';
 import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { gameActions } from '@store/game-slice';
-import { listGames, saveGame } from '@store/game-actions';
+import { saveGame } from '@store/game-actions';
 import { getMoneyInReal } from '@shared/helpers/utils';
 
 import { Cart } from '@components/Cart';
@@ -26,8 +26,6 @@ export function CartButton({ color }: ButtonProps) {
   const minCartValue = useSelector(
     (state: RootStateOrAny) => state.game.minCartValue
   );
-  const { token } = useSelector((state: RootStateOrAny) => state.auth.user);
-  const typesGame = useSelector((state: RootStateOrAny) => state.game.types);
 
   const formatCartValue = getMoneyInReal(Number(minCartValue));
 
@@ -43,9 +41,9 @@ export function CartButton({ color }: ButtonProps) {
 
   const onSave = () => {
     if (+totalPrice < 30) {
-      alert(`O valor mínimo do carrinho precisa ser ${formatCartValue}.`);
+      alert(`The cart total value is less than ${formatCartValue}.`);
     } else {
-      dispatch(saveGame({ games, token }));
+      dispatch(saveGame({ games }));
       dispatch(gameActions.cleanCart());
       onModalClose();
     }

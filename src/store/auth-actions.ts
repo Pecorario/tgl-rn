@@ -1,9 +1,9 @@
-import { Dispatch } from 'redux';
 import Toast from 'react-native-toast-message';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Dispatch } from 'redux';
+import { authServices } from '@shared/services/auth';
 import { authActions } from './auth-slice';
 import { BodyReqTypeProps, UserProps } from '@models/AuthProps';
-import { authServices } from '@shared/services/auth';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const sendLogin = ({ email, password }: UserProps) => {
   return async (dispatch: Dispatch) => {
